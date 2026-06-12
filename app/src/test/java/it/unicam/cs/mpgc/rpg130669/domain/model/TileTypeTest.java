@@ -1,5 +1,6 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model;
 
+import it.unicam.cs.mpgc.rpg130669.domain.model.map.TileType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

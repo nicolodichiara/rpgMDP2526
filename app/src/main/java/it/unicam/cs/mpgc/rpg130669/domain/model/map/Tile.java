@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130669.domain.model;
+package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
 import java.util.Objects;
 

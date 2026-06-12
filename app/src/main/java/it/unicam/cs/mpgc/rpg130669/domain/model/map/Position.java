@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130669.domain.model;
+package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
     //   non vengono effettuati controlli di validità sui valori nei metodi
     //   che vanno a cambiare il valore della posizione (responsabilità esterna)

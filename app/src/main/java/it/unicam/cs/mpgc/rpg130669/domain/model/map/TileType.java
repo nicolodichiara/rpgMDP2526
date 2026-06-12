@@ -1,5 +1,8 @@
-package it.unicam.cs.mpgc.rpg130669.domain.model;
+package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -25,17 +28,16 @@ public enum TileType {
         this.fishable = fishable;
     }
 
+    @JsonValue
     public String getCode() { return code;}
-
     public boolean isFishable() { return fishable;}
-
     public boolean isWalkable() { return walkable;}
 
     // mappa statica che permette O(1), costruita al caricamento della classe
     private static final Map<String, TileType> BY_CODE = Arrays.stream(values())
             .collect(Collectors
                     .toUnmodifiableMap(TileType::getCode, t -> t));
-
+    @JsonCreator
     public static TileType fromCode(String code) {
         if (code == null) {
             throw new IllegalArgumentException("tiletype non conosciuto : null");
