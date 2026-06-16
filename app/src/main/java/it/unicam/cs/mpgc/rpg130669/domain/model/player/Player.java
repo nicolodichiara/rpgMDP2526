@@ -22,17 +22,12 @@ public class Player {
     private static final int EXP_VALUE_PER_LVL = 100;
 
     private final String id;
-    private final String name;
     private Position position;
     private final Inventory inventory;
     private final Map<Stat, Integer> stats;
     private final Map<Stat, Integer> expPerStat;
 
     public Player (String id, String name, Position initalPos){
-
-        this.id        = Objects.requireNonNull(id,            "id non può essere null");
-        this.name      = Objects.requireNonNull(name,          "name non può essere null");
-        this.position  = Objects.requireNonNull(initalPos, "startPosition non può essere null");
 
         this.inventory = new Inventory();
 
