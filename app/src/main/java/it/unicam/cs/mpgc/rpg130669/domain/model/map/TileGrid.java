@@ -79,7 +79,7 @@ public class TileGrid {
 
     // lista delle posizioni occupate vicino un'entità (8 caselle adiacenti)
    
-    public List<Position> getNeighbours(Position pos){
+    public List<Position> getNeighbors(Position pos){
         
         validatePositions(pos);
         List<Position> neighbours = new ArrayList<>(8);

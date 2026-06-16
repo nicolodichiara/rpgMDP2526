@@ -34,8 +34,8 @@ public class Inventory {
         else items.put(item, current - quantity);
     }
 
-    private boolean contains(Item item){ return items.containsKey(item); }
-    private boolean isEmpty(){ return items.isEmpty(); }
+    public boolean contains(Item item){ return items.containsKey(item); }
+    public boolean isEmpty(){ return items.isEmpty(); }
     public int getQuantity(Item item){ return items.getOrDefault(item, 0); }
 
     public Map<Item, Integer> getItems(){

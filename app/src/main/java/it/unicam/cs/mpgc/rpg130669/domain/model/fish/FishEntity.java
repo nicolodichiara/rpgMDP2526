@@ -50,7 +50,7 @@ public class FishEntity {
     // metodi di stato del pesce
     //-------------------------------------------------------------------------------------------------------------------------------------
     public boolean isDefeated(){return hp <= 0;}
-    public boolean isExausted(){return stamina <= 0;}
+    public boolean isExhausted(){return stamina <= 0;}
 
     // presente qui e non nell'engine perchè risponde a una query sul pesce stesso
     public boolean isOutOfRange(Position playerPos) {

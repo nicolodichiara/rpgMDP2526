@@ -12,6 +12,7 @@ package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
 import it.unicam.cs.mpgc.rpg130669.domain.model.fish.FishTemplate;
 import it.unicam.cs.mpgc.rpg130669.domain.model.world.Weather;
+import javafx.scene.transform.Transform;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,6 +43,20 @@ public class SpawnZone {
     public int area() {
         return (bottomRight.row() - topLeft.row() + 1)
                 * (bottomRight.col() - topLeft.col() + 1);
+    }
+
+    public int getMaxFish(){
+        return maxFish;
+    }
+    public List<WeightedFish> getFishPool(){
+        return fishPool;
+    }
+
+    public Position getTopLeft() {
+        return topLeft;
+    }
+    public Position getBottomRight(){
+        return bottomRight;
     }
 
     public record WeightedFish(FishTemplate template, float weight){
