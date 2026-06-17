@@ -22,6 +22,7 @@ public class Player {
     private static final int EXP_VALUE_PER_LVL = 100;
 
     private final String id;
+    private final String name;
     private Position position;
     private final Inventory inventory;
     private final Map<Stat, Integer> stats;
@@ -29,8 +30,9 @@ public class Player {
 
     public Player (String id, String name, Position initalPos){
 
+        this.id = Objects.requireNonNull(id, "id non può essere null");
+        this.name = Objects.requireNonNull(name, "name non può essere null");
         this.inventory = new Inventory();
-
         this.stats = new EnumMap<>(Stat.class);
         this.expPerStat = new EnumMap<>(Stat.class);
         // inizializzazione delle mappe ai valori di base

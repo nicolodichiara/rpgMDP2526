@@ -14,10 +14,10 @@ import java.util.Random;
  *
  * Nota: non modifica GameMap né Player — lavora solo su FishEntity.
  */
-public class FishBehaviourEngine {
+public class FishBehaviorEngine {
    private final Random random;
 
-   public FishBehaviourEngine(Random random){
+   public FishBehaviorEngine(Random random){
        this.random = random;
    }
 

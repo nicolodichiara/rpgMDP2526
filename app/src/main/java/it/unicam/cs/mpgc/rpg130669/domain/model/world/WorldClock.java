@@ -26,7 +26,7 @@ public class WorldClock {
         return new WorldClock(1, Weather.CLEAR, TimeOfDay.DAWN);
     }
 
-    public void Advance(){
+    public void advance(){
         TimeOfDay next = timeOfDay.next();
         if (next == TimeOfDay.DAWN) this.day++;
         timeOfDay = next;
@@ -45,6 +45,5 @@ public class WorldClock {
         return "Giorno " + day + " — " + timeOfDay.getCode() + " (" + weather.getCode() + ")";
     }
     public boolean isNight()      { return timeOfDay == TimeOfDay.NIGHT; }
-
     public boolean isMapAccessible() { return weather.isMapAccessible(); }
 }
