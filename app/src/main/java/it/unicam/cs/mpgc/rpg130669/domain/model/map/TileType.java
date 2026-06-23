@@ -1,50 +1,42 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public enum TileType {
-    GRASS("grass", true, false),
-    DOCK("dock", true, true),
-    WATER("water", false, true),
+
+    GRASS     ("grass",      true,  false),
+    DOCK      ("dock",       true,  true),
+    WATER     ("water",      false, true),
     DEEP_WATER("deep_water", false, true),
-    ROCK("rock", false, false),
-    SAND("sand", true, false);
+    ROCK      ("rock",       false, false),
+    SAND      ("sand",       true,  false);
 
-// deseriallizzazione della stringa, creo un campo code, walkable e fishable
-
-    private final String code;
-    private final boolean fishable;
+    private final String  code;
     private final boolean walkable;
+    private final boolean fishable;
 
     TileType(String code, boolean walkable, boolean fishable) {
+        if(code == null) throw new IllegalArgumentException("code non deve essere null");
         this.code = code;
         this.walkable = walkable;
         this.fishable = fishable;
     }
 
-    @JsonValue
-    public String getCode() { return code;}
-    public boolean isFishable() { return fishable;}
-    public boolean isWalkable() { return walkable;}
+    private static final Map<String, TileType> BY_CODE =
+            Arrays.stream(values())
+                    .collect(Collectors.toUnmodifiableMap(TileType::getCode, t -> t));
 
-    // mappa statica che permette O(1), costruita al caricamento della classe
-    private static final Map<String, TileType> BY_CODE = Arrays.stream(values())
-            .collect(Collectors
-                    .toUnmodifiableMap(TileType::getCode, t -> t));
-    @JsonCreator
+    public String  getCode()    { return code;     }
+    public boolean isWalkable() { return walkable; }
+    public boolean isFishable() { return fishable; }
+
     public static TileType fromCode(String code) {
-        if (code == null) {
-            throw new IllegalArgumentException("tiletype non conosciuto : null");
-        }
         TileType type = BY_CODE.get(code);
-        if (type == null) throw new IllegalArgumentException("tiletype non conosciuto :" + code);
+        if (type == null)
+            throw new IllegalArgumentException("tiletype non conosciuto");
         return type;
-        }
-
     }
+}

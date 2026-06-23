@@ -65,6 +65,11 @@ public class TileGrid {
         return grid[position.row()][position.col()];
     }
 
+    public void setTile(Position position, Tile tile){
+        validatePositions(position);
+        grid[position.row()][position.col()] = tile;
+    }
+
     // Alternativa con coordinate separate
     public Tile getTile(int row, int col) {
         return getTile(new Position(row, col));
@@ -82,20 +87,18 @@ public class TileGrid {
     public List<Position> getNeighbors(Position pos){
         
         validatePositions(pos);
-        List<Position> neighbours = new ArrayList<>(8);
+        List<Position> neighbors = new ArrayList<>();
         
         for (int i = pos.row() - 1 ; i <= pos.row() + 1; i++){
             for (int j = pos.col() - 1; j <= pos.col() + 1; j++){
                 
                 if (i == pos.row() && j == pos.col()) continue;
-                
+
                 Position neighbor = new Position(i,j);
-                if (isValid(neighbor)){
-                    neighbours.add(neighbor);
-                }
+                if (isValid(neighbor)) neighbors.add(neighbor);
             }
         }
-        return neighbours;
+        return neighbors;
     }
     
     public List<Position> getAllPositions(){

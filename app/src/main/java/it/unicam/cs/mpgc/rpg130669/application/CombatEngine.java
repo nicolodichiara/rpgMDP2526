@@ -35,6 +35,9 @@ public class CombatEngine {
     // turno del giocatore
 
     public void applyPlayerAction(FishingSession session, PlayerAction action, Item usedItem) {
+
+        if(!session.isPlayerTurn()) throw new IllegalStateException("non è il turno del giocatore");
+
         CombatState state = session.getCombatState();
         Player player = session.getPlayer();
         FishEntity fish = session.getTargetFish();
@@ -133,6 +136,7 @@ public class CombatEngine {
     private void resolveStruggle(CombatState state) {
         state.damageRod(STRUGGLE_ROD_DAMAGE);
         state.addEffect("Il pesce si dibatte! Canna danneggiata di " + STRUGGLE_ROD_DAMAGE + ".");
+
     }
 
     private void resolveSwimAway(CombatState state) {

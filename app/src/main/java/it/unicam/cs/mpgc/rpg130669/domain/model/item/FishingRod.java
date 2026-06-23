@@ -19,7 +19,6 @@ public class FishingRod extends AbstractItem {
         this.power = power;
         this.range = range;
     }
-
     public int getPower() { return power; }
     public int getRange() { return range; }
 }

@@ -26,11 +26,11 @@ public class Inventory {
         // check
         if (quantity <= 0) throw new IllegalArgumentException("quantity deve essere > 0: " + quantity);
 
-        int current = getQuantity(item);
+        int current = items.get(item);
 
 
         if (quantity == current) items.remove(item);
-        if (quantity > current) items.put(item, 0);
+        else if (quantity > current) throw new IllegalStateException("la quantità che si vuole rimuovere è superiore a quella presente nell'inventario");
         else items.put(item, current - quantity);
     }
 

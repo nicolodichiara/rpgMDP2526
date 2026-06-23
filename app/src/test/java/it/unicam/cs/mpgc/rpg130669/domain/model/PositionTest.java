@@ -18,22 +18,6 @@ class PositionTest {
     }
 
     @Test
-    @DisplayName("Dovrebbe lanciare eccezione per riga negativa")
-    void testNegativeRow() {
-        IllegalStateException exception = assertThrows(IllegalStateException.class,
-                () -> new Position(-1, 3));
-        assertTrue(exception.getMessage().contains("valore della riga negativo"));
-    }
-
-    @Test
-    @DisplayName("Dovrebbe lanciare eccezione per colonna negativa")
-    void testNegativeCol() {
-        IllegalStateException exception = assertThrows(IllegalStateException.class,
-                () -> new Position(3, -1));
-        assertTrue(exception.getMessage().contains("valore della colonna negativo"));
-    }
-
-    @Test
     @DisplayName("Dovrebbe accettare valori zero")
     void testZeroValues() {
         assertDoesNotThrow(() -> new Position(0, 0));

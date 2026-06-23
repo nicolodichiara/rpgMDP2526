@@ -3,7 +3,6 @@ package it.unicam.cs.mpgc.rpg130669.application;
 import it.unicam.cs.mpgc.rpg130669.domain.model.item.Bait;
 import it.unicam.cs.mpgc.rpg130669.domain.model.item.FishingRod;
 import it.unicam.cs.mpgc.rpg130669.domain.model.item.Item;
-import it.unicam.cs.mpgc.rpg130669.domain.model.player.Inventory;
 import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;
 
 import java.util.Objects;

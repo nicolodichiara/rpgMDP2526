@@ -18,15 +18,14 @@ repositories {
 
 dependencies {
     // JSON
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.0")
+    implementation("com.google.code.gson:gson:2.13.2")
     // XML — JAXB standalone (rimosso dal JDK dal 9 in poi)
-    implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.2")
-    runtimeOnly("com.sun.xml.bind:jaxb-impl:4.0.5")
 
     // Database — SQLite è il più semplice per un progetto accademico
     implementation("org.xerial:sqlite-jdbc:3.47.0.0")
 
     // Test
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.11.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

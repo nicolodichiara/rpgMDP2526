@@ -50,7 +50,7 @@ class TileTypeTest {
     @Test
     @DisplayName("Dovrebbe gestire codice null")
     void testFromCodeNull() {
-        assertThrows(IllegalArgumentException.class, () -> TileType.fromCode(null));
+        assertThrows(NullPointerException.class, () -> TileType.fromCode(null));
     }
 
     @Test

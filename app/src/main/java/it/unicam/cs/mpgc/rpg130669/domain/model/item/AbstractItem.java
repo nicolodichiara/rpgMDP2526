@@ -12,7 +12,7 @@ public abstract class AbstractItem implements Item {
     private final String id;
     private final String name;
     private final String description;
-    private int durability;   // -1 = infinita
+    private int durability; // -1 = infinita
 
     protected AbstractItem(String id, String name, String description, int durability) {
         this.id          = Objects.requireNonNull(id,          "id non può essere null");
@@ -27,18 +27,17 @@ public abstract class AbstractItem implements Item {
     @Override public String getName()        { return name;        }
     @Override public String getDescription() { return description; }
     public    int    getDurability()         { return durability;  }
-    public    boolean hasInfiniteDurability(){ return durability == -1; }
 
     @Override
     public boolean isBroken() {
-        return durability != -1 && durability <= 0;
+        return durability <= 0;
     }
 
     /**
      * Riduce la durabilità di `amount`. No-op se durabilità infinita o già rotto.
      */
     public void wear(int amount) {
-        if (hasInfiniteDurability() || isBroken()) return;
+        if (isBroken()) return;
         if (amount <= 0) throw new IllegalArgumentException("amount deve essere > 0: " + amount);
         durability = Math.max(0, durability - amount);
     }

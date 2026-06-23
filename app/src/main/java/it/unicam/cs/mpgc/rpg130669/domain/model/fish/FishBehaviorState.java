@@ -1,8 +1,5 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.fish;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,13 +17,13 @@ public enum FishBehaviorState {
     FishBehaviorState(String code){
         this.code = code;
     }
-    @JsonValue
+
     public String getCode(){return this.code;}
 
     private static final Map<String, FishBehaviorState> BY_CODE = Arrays.stream(values())
             .collect(Collectors
                     .toUnmodifiableMap(FishBehaviorState::getCode, t -> t));
-    @JsonCreator
+
     public static FishBehaviorState fromCode(String code) {
         if (code == null) {
             throw new IllegalArgumentException("FishBehaviourState non conosciuto : null");

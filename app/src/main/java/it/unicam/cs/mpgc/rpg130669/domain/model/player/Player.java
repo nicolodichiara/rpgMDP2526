@@ -42,7 +42,27 @@ public class Player {
         }
     }
 
-    // getter ai-generated
+    /*
+      Costruttore di ripristino usato da SaveGameRepository per
+      ricreare un Player da uno stato salvato con valori esatti
+      (non tramite gainXp, che è incrementale).
+      L'inventario viene popolato separatamente dal repository.
+     */
+    public Player(String id, String name, Position position,
+                  Map<Stat, Integer> stats, Map<Stat, Integer> xpPerStat) {
+        this.id        = Objects.requireNonNull(id,       "id non può essere null");
+        this.name      = Objects.requireNonNull(name,     "name non può essere null");
+        this.position  = Objects.requireNonNull(position, "position non può essere null");
+        this.inventory = new Inventory();
+
+        this.stats     = new EnumMap<>(Stat.class);
+        this.stats.putAll(Objects.requireNonNull(stats, "stats non può essere null"));
+
+        this.expPerStat = new EnumMap<>(Stat.class);
+        this.expPerStat.putAll(Objects.requireNonNull(xpPerStat, "xpPerStat non può essere null"));
+    }
+
+    // getter AI-generated
 
     public String    getId()        { return id;        }
     public String    getName()      { return name;      }
@@ -61,7 +81,7 @@ public class Player {
         return Collections.unmodifiableMap(stats);
     }
 
-    // fine ai
+    // fine AI
 
     // livello generale del giocatore (media delle statistiche)
 
