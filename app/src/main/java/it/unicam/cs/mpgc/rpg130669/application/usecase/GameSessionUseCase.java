@@ -48,6 +48,7 @@ public class GameSessionUseCase {
     private FishingSession  activeSession;
     private Position        lastCastPosition;
     private List<Quest>     activeQuests;
+    private boolean         mapJustCleared = false;
 
     public GameSessionUseCase(FishBehaviorEngine fishBehaviorEngine,
                               CombatEngine combatEngine,
@@ -75,12 +76,12 @@ public class GameSessionUseCase {
         spawnService.populate(currentMap, clock);
     }
 
-    public boolean loadGame(String playerId, GameMap resolvedMap, List<Quest> quests) {
+    public boolean loadGame(String playerId, List<Quest> quests) {
         Optional<SaveGameRepository.SaveGameSnapshot> snap = saveRepo.load(playerId);
         if (snap.isEmpty()) return false;
         this.player       = snap.get().player();
-        this.currentMap   = resolvedMap;
-        this.clock        = snap.get().clock();
+        this.currentMap   = snap.get().currentMap();   // ← non serve più passarla da fuori
+        this.clock         = snap.get().clock();
         this.activeQuests = quests;
         spawnService.populate(currentMap, clock);
         return true;
@@ -155,7 +156,9 @@ public class GameSessionUseCase {
     public boolean changeMap(GameMap newMap) {
         if (!player.canAccessMap(newMap.getRequiredLevel())) return false;
         currentMap       = newMap;
+        player.setPosition(newMap.getDefaultSpawnPosition());   // ← evita posizioni fuori griglia
         lastCastPosition = null;
+        mapJustCleared   = false;
         spawnService.populate(currentMap, clock);
         return true;
     }
@@ -189,14 +192,27 @@ public class GameSessionUseCase {
             try {
                 journalRepo.recordCatch(player.getId(), fish.getTemplate().id(), 0);
             } catch (RuntimeException e) {
-                // La cattura è avvenuta lo stesso — il journal è solo storico,
-                // un suo fallimento non deve bloccare il gioco.
                 System.err.println("⚠ Impossibile registrare la cattura nel journal: " + e.getMessage());
             }
             currentMap.removeFish(fish);
+
+            if (currentMap.isCleared()) {
+                mapJustCleared = true;   // ← si alza esattamente al momento della transizione
+            }
         }
         activeSession    = null;
         lastCastPosition = null;
+    }
+
+    /**
+     * Consuma il flag di "livello completato": ritorna true solo la prima
+     * volta che viene letto dopo che l'ultimo pesce della mappa è stato
+     * catturato. La presentation layer lo controlla dopo ogni combattimento.
+     */
+    public boolean consumeMapClearedFlag() {
+        boolean wasCleared = mapJustCleared;
+        mapJustCleared = false;
+        return wasCleared;
     }
 
     private void requireActiveSession() {
@@ -208,4 +224,6 @@ public class GameSessionUseCase {
         if (activeSession != null && activeSession.isActive())
             throw new IllegalStateException("C'è già una sessione di pesca attiva");
     }
+
+
 }

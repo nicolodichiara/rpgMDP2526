@@ -16,6 +16,8 @@
                    style="-fx-text-fill: #f5e642; -fx-font-family: 'Monospace'; -fx-font-size: 13;"/>
             <Label fx:id="mapLabel"
                    style="-fx-text-fill: #c0c0c0; -fx-font-family: 'Monospace'; -fx-font-size: 13;"/>
+            <Label fx:id="fishLabel"
+                   style="-fx-text-fill: #ff6b35; -fx-font-family: 'Monospace'; -fx-font-size: 13;"/>
         </HBox>
     </top>
 
@@ -47,6 +49,10 @@
                     maxWidth="Infinity"
                     style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
                            -fx-font-family: 'Monospace'; -fx-cursor: hand;"/>
+            <Button fx:id="changeMapButton" text="🗺 Cambia mappa" onAction="#onChangeMap"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
+               -fx-font-family: 'Monospace'; -fx-cursor: hand;"/>
 
             <Separator style="-fx-background-color: #0f3460;"/>
 

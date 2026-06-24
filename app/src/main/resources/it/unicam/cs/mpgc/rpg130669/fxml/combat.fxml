@@ -1,70 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
+
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.unicam.cs.mpgc.rpg130669.presentation.controller.CombatController"
-      spacing="12"
-      style="-fx-background-color: #16213e; -fx-padding: 20; -fx-min-width: 340;">
+<VBox spacing="12" style="-fx-background-color: #16213e; -fx-padding: 20; -fx-min-width: 340;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="it.unicam.cs.mpgc.rpg130669.presentation.controller.CombatController">
 
-    <Label text="SESSIONE DI PESCA"
-           style="-fx-text-fill: #f5e642; -fx-font-family: 'Monospace';
-                  -fx-font-size: 14; -fx-font-weight: bold;"/>
+    <Label style="-fx-text-fill: #f5e642; -fx-font-family: 'Monospace';                   -fx-font-size: 14; -fx-font-weight: bold;" text="FASE DI COMBATTIMENTO" />
 
     <!-- Info pesce -->
     <VBox spacing="4" style="-fx-background-color: #0d0d1a; -fx-padding: 10; -fx-background-radius: 4;">
-        <Label fx:id="fishNameLabel"
-               style="-fx-text-fill: #ff6b35; -fx-font-family: 'Monospace'; -fx-font-size: 13;"/>
+        <Label fx:id="fishNameLabel" style="-fx-text-fill: #ff6b35; -fx-font-family: 'Monospace'; -fx-font-size: 13;" />
         <HBox spacing="16">
-            <Label fx:id="fishHpLabel"
-                   style="-fx-text-fill: #c0c0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
-            <Label fx:id="fishStaminaLabel"
-                   style="-fx-text-fill: #c0c0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
+            <Label fx:id="fishHpLabel" style="-fx-text-fill: #c0c0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
+            <Label fx:id="fishStaminaLabel" style="-fx-text-fill: #c0c0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
         </HBox>
-        <ProgressBar fx:id="fishHpBar"   maxWidth="Infinity"
-                     style="-fx-accent: #ff4444;"/>
-        <ProgressBar fx:id="fishStaminaBar" maxWidth="Infinity"
-                     style="-fx-accent: #44aaff;"/>
+        <ProgressBar fx:id="fishHpBar" maxWidth="Infinity" style="-fx-accent: #ff4444;" />
+        <ProgressBar fx:id="fishStaminaBar" maxWidth="Infinity" style="-fx-accent: #44aaff;" />
     </VBox>
 
     <!-- Stato combattimento -->
     <HBox spacing="20" style="-fx-background-color: #0d0d1a; -fx-padding: 8; -fx-background-radius: 4;">
-        <Label fx:id="distanceLabel"
-               style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
-        <Label fx:id="rodDurLabel"
-               style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
-        <Label fx:id="turnLabel"
-               style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
+        <Label fx:id="distanceLabel" style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
+        <Label fx:id="rodDurLabel" style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
+        <Label fx:id="turnLabel" style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
     </HBox>
 
     <!-- Log turni -->
-    <TextArea fx:id="combatLog" editable="false" wrapText="true"
-              prefHeight="150"
-              style="-fx-control-inner-background: #0d0d1a;
-                     -fx-text-fill: #c0c0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
+    <TextArea fx:id="combatLog" editable="false" prefHeight="150" style="-fx-control-inner-background: #0d0d1a;                      -fx-text-fill: #c0c0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;" wrapText="true" />
 
     <!-- Azioni -->
-    <Label text="TURNO GIOCATORE"
-           style="-fx-text-fill: #606080; -fx-font-family: 'Monospace'; -fx-font-size: 10;"/>
+    <Label style="-fx-text-fill: #606080; -fx-font-family: 'Monospace'; -fx-font-size: 10;" text="TURNO GIOCATORE" />
     <HBox spacing="8">
-        <Button fx:id="pullBtn"    text="TIRA"       onAction="#onPull"
-                style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
-                       -fx-font-family: 'Monospace'; -fx-cursor: hand;" HBox.hgrow="ALWAYS"
-                maxWidth="Infinity"/>
-        <Button fx:id="waitBtn"    text= "ASPETTA"    onAction="#onWait"
-                style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
-                       -fx-font-family: 'Monospace'; -fx-cursor: hand;" HBox.hgrow="ALWAYS"
-                maxWidth="Infinity"/>
+        <Button fx:id="pullBtn" maxWidth="Infinity" onAction="#onPull" style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;                        -fx-font-family: 'Monospace'; -fx-cursor: hand;" text="TIRA" HBox.hgrow="ALWAYS" />
+        <Button fx:id="waitBtn" maxWidth="Infinity" onAction="#onWait" style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;                        -fx-font-family: 'Monospace'; -fx-cursor: hand;" text="ASPETTA" HBox.hgrow="ALWAYS" />
     </HBox>
     <HBox spacing="8">
-        <Button fx:id="baitBtn"    text="ESCA"       onAction="#onBait"
-                style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
-                       -fx-font-family: 'Monospace'; -fx-cursor: hand;" HBox.hgrow="ALWAYS"
-                maxWidth="Infinity"/>
-        <Button fx:id="giveUpBtn"  text="ABBANDONA"  onAction="#onGiveUp"
-                style="-fx-background-color: #3d0000; -fx-text-fill: #ff8080;
-                       -fx-font-family: 'Monospace'; -fx-cursor: hand;" HBox.hgrow="ALWAYS"
-                maxWidth="Infinity"/>
+        <Button fx:id="baitBtn" maxWidth="Infinity" onAction="#onBait" style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;                        -fx-font-family: 'Monospace'; -fx-cursor: hand;" text="ESCA" HBox.hgrow="ALWAYS" />
+        <Button fx:id="giveUpBtn" maxWidth="Infinity" onAction="#onGiveUp" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #3d0000; -fx-text-fill: #ff8080;                        -fx-font-family: 'Monospace'; -fx-cursor: hand;" text="ABBANDONA" HBox.hgrow="ALWAYS" />
     </HBox>
 
 </VBox>

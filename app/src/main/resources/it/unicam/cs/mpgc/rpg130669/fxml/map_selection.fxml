@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.unicam.cs.mpgc.rpg130669.presentation.controller.MapSelectionController"
+      spacing="12"
+      style="-fx-background-color: #16213e; -fx-padding: 20; -fx-min-width: 380;">
+
+    <Label text="🗺  CAMBIA MAPPA"
+           style="-fx-text-fill: #f5e642; -fx-font-family: 'Monospace';
+                  -fx-font-size: 14; -fx-font-weight: bold;"/>
+
+    <ListView fx:id="mapListView" prefHeight="280"
+              style="-fx-control-inner-background: #0d0d1a;
+                     -fx-text-fill: #e0e0e0; -fx-font-family: 'Monospace';"/>
+
+    <Label fx:id="infoLabel" wrapText="true"
+           style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
+
+    <HBox spacing="8">
+        <Button fx:id="goButton" text="➜ Vai" onAction="#onGo"
+                maxWidth="Infinity" HBox.hgrow="ALWAYS"
+                style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
+                       -fx-font-family: 'Monospace'; -fx-cursor: hand;"/>
+        <Button text="Annulla" onAction="#onCancel"
+                maxWidth="Infinity" HBox.hgrow="ALWAYS"
+                style="-fx-background-color: #3d0000; -fx-text-fill: #ff8080;
+                       -fx-font-family: 'Monospace'; -fx-cursor: hand;"/>
+    </HBox>
+</VBox>

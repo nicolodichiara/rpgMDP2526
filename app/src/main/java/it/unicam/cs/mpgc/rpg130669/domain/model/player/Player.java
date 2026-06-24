@@ -140,6 +140,12 @@ public class Player {
         return currentExp;
     }
 
+    // metodo che ritorna il progresso dell'exp
+    // di una statistica in forma percentuale
+    public double getStatProgress(Stat stat){
+        if (checkMaxLvl(stat)) return 1.0;
+            else return (double) getXp(stat) / EXP_VALUE_PER_LVL;
+    }
     public boolean checkMaxLvl(Stat stat) {
         return (stats.get(stat) >= STAT_MAX_VALUE);
     }

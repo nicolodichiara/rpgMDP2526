@@ -75,6 +75,7 @@ public class AppContext {
     public MapRepository      getMapRepository()      { return mapRepository;      }
     public JournalRepository  getJournalRepository()  { return journalRepository;  }
     public VisibilityService  getVisibilityService()  { return visibilityService;  }
+    public SaveGameRepository getSaveGameRepository() { return saveGameRepository; }
 
     public void shutdown() {
         try { databaseManager.close(); }

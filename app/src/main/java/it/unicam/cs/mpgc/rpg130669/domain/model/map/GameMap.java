@@ -50,8 +50,21 @@ public class GameMap {
         activeFish.add(fish);
     }
 
+    /** Prima tile camminabile della griglia — punto di ingresso predefinito. */
+    public Position getDefaultSpawnPosition() {
+        return grid.getAllPositions().stream()
+                .filter(this::isWalkable)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Nessuna tile camminabile in " + name));
+    }
+
     public void removeFish(FishEntity fish) {
         activeFish.remove(fish);
+    }
+
+    /** True se non ci sono più pesci attivi — la mappa è "pulita" per questa visita. */
+    public boolean isCleared() {
+        return activeFish.isEmpty();
     }
 
     /** Deleghe alla TileGrid — evitano di esporre la griglia direttamente. */

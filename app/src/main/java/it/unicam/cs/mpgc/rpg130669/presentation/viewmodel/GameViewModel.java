@@ -27,6 +27,7 @@ public class GameViewModel {
 
     // ── property osservabili ─────────────────────────────────────────────────
 
+    private final StringProperty fishCountLabel = new SimpleStringProperty("");
     private final StringProperty  clockLabel   = new SimpleStringProperty("");
     private final StringProperty  playerLabel  = new SimpleStringProperty("");
     private final IntegerProperty playerLevel  = new SimpleIntegerProperty(0);
@@ -54,6 +55,7 @@ public class GameViewModel {
         System.out.println("Player pos: " + player.getPosition() + " | tile alla pos: " + grid.get(player.getPosition()));
         tileGrid.set(grid);
 
+        fishCountLabel.set("🐟 Pesci nella mappa: " + map.getActiveFish().size());
         clockLabel .set("Giorno " + clock.getDay() + " — " + clock.getTimeOfDay().getCode());
         playerLabel.set(player.getName() + "  Lv." + player.getLevel());
         playerLevel.set(player.getLevel());
@@ -62,6 +64,8 @@ public class GameViewModel {
 
         tileGrid.set(buildTileGrid(map, player));
     }
+
+    public StringProperty fishCountLabelProperty() { return fishCountLabel; }
 
     private Map<Position, TileViewModel> buildTileGrid(GameMap map, Player player) {
         Map<Position, TileViewModel> grid = new HashMap<>();

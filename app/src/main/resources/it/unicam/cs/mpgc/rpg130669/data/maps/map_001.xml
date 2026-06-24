@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map id="1" name="Lago del Principiante" requiredLevel="1">
 
-    <grid rows="8" cols="10">
+    <grid rows="20" cols="10">
         <!-- G=grass, D=dock, W=water, R=rock, S=sand -->
         <row>rock,  rock,  grass, grass, grass, grass, grass, grass, rock,  rock </row>
         <row>rock,  grass, grass, grass, grass, grass, grass, grass, grass, rock </row>
         <row>grass, grass, dock,  dock,  dock,  dock,  dock,  grass, grass, grass</row>
         <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
         <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
-        <row>grass, grass, water, water, deep_water,deep_water,water,water,grass,grass</row>
+        <row>grass,grass,water,water,deep_water,deep_water,water,water,grass,grass</row>
+        <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
+        <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
+        <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
+        <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
+        <row>grass,grass,water,water,deep_water,deep_water,water,water,grass,grass</row>
+        <row>grass,grass,water,water,deep_water,deep_water,water,water,grass,grass</row>
+        <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
+        <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
+        <row>grass,grass,water,water,deep_water,deep_water,water,water,grass,grass</row>
+        <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
+        <row>grass, grass, water, water, water, water, water, water, grass, grass</row>
+        <row>grass,grass,water,water,deep_water,deep_water,water,water,grass,grass</row>
         <row>grass, grass, sand,  sand,  sand,  sand,  sand,  sand,  grass, grass</row>
         <row>grass, grass, grass, grass, grass, grass, grass, grass, grass, grass</row>
     </grid>

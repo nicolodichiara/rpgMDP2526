@@ -5,6 +5,7 @@ import it.unicam.cs.mpgc.rpg130669.application.usecase.InventoryUseCase;
 import it.unicam.cs.mpgc.rpg130669.domain.model.combat.FishingSession;
 import it.unicam.cs.mpgc.rpg130669.domain.model.map.Position;
 import it.unicam.cs.mpgc.rpg130669.domain.model.player.Stat;
+import it.unicam.cs.mpgc.rpg130669.domain.repository.MapRepository;
 import it.unicam.cs.mpgc.rpg130669.domain.service.VisibilityService;
 import it.unicam.cs.mpgc.rpg130669.presentation.view.MapRenderer;
 import it.unicam.cs.mpgc.rpg130669.presentation.viewmodel.GameViewModel;
@@ -13,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
@@ -37,11 +37,15 @@ public class GameController {
     @FXML private Button    castButton;
     @FXML private StackPane mapContainer;
     @FXML private ScrollPane mapScrollPane;
+    @FXML private Label fishLabel;
+
 
     private GameSessionUseCase session;
     private InventoryUseCase   inventoryUseCase;
     private GameViewModel      viewModel;
     private MapRenderer        mapRenderer;
+    private MapRepository      mapRepository;
+
 
     // Posizione selezionata per il cast (null se nessuna)
     private Position selectedCastTarget = null;
@@ -51,9 +55,11 @@ public class GameController {
      */
     public void init(GameSessionUseCase session,
                      InventoryUseCase inventoryUseCase,
-                     VisibilityService visibilityService) {
+                     VisibilityService visibilityService,
+                     MapRepository mapRepository) {
         this.session          = session;
         this.inventoryUseCase = inventoryUseCase;
+        this.mapRepository    = mapRepository;
         this.viewModel        = new GameViewModel(session, visibilityService);
 
         setupMapRenderer();
@@ -61,6 +67,7 @@ public class GameController {
         bindViewModel();
         viewModel.refresh();
     }
+
 
     // ── setup ─────────────────────────────────────────────────────────────────
 
@@ -88,6 +95,7 @@ public class GameController {
     private void bindViewModel() {
         clockLabel .textProperty() .bind(viewModel.clockLabelProperty());
         playerLabel.textProperty().bind(viewModel.playerLabelProperty());
+        fishLabel.textProperty().bind(viewModel.fishCountLabelProperty());
 
         // Aggiorna mappa quando la griglia cambia
         viewModel.tileGridProperty().addListener((obs, old, grid) -> {
@@ -161,6 +169,33 @@ public class GameController {
         }
     }
 
+    @FXML
+    private void onChangeMap() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/it/unicam/cs/mpgc/rpg130669/fxml/map_selection.fxml"));
+            Parent root = loader.load();
+
+            MapSelectionController msc = loader.getController();
+            msc.init(session, mapRepository, () -> {
+                viewModel.refresh();
+                appendLog("🗺 Mappa cambiata: " + session.getCurrentMap().getName());
+            });
+
+            Stage mapStage = new Stage();
+            mapStage.initModality(Modality.WINDOW_MODAL);
+            mapStage.initOwner(mapScrollPane.getScene().getWindow());
+            mapStage.setTitle("Cambia Mappa");
+            mapStage.setScene(new Scene(root));
+            mapStage.setResizable(false);
+            mapStage.showAndWait();
+
+            mapScrollPane.requestFocus();
+        } catch (Exception e) {
+            appendLog("⚠ Errore nell'apertura del menu mappe: " + e.getMessage());
+        }
+    }
+
     // ── finestra combattimento ────────────────────────────────────────────────
 
     private void openCombatWindow(FishingSession fishingSession) {
@@ -177,6 +212,11 @@ public class GameController {
                     viewModel.refresh();
                     appendLog("Combattimento concluso.");
                     mapScrollPane.requestFocus();
+
+                    if (session.consumeMapClearedFlag()) {
+                        appendLog("🏆 Hai catturato tutti i pesci di " + session.getCurrentMap().getName()
+                                + "! Usa '🗺 Cambia mappa' per esplorare altrove.");
+                    }
                 });
             });
 
@@ -194,12 +234,19 @@ public class GameController {
     }
     // ── aggiornamento UI ──────────────────────────────────────────────────────
 
+
     private void updateStatBar() {
         var player = session.getPlayer();
-        perceptionLabel.setText("PERC: " + player.getStat(Stat.PERCEPTION));
-        castingLabel.setText("CAST: "    + player.getStat(Stat.CASTING));
-        strengthLabel.setText("STR: "    + player.getStat(Stat.STRENGTH));
-        patienceLabel.setText("PAT: "    + player.getStat(Stat.PATIENCE));
+        perceptionLabel.setText(formatStat("PERC", Stat.PERCEPTION, player));
+        castingLabel.setText(formatStat("CAST", Stat.CASTING, player));
+        strengthLabel.setText(formatStat("STR",  Stat.STRENGTH,  player));
+        patienceLabel.setText(formatStat("PAT",  Stat.PATIENCE,  player));
+    }
+
+    private String formatStat(String label, Stat stat,
+                              it.unicam.cs.mpgc.rpg130669.domain.model.player.Player player) {
+        int progressPercent = (int) Math.round(player.getStatProgress(stat) * 100);
+        return label + ": " + player.getStat(stat) + " (" + progressPercent + "%)";
     }
 
     private void updateMapLabel() {

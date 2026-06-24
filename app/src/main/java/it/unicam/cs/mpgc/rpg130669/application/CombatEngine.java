@@ -166,4 +166,13 @@ public class CombatEngine {
             session.setEscaped();
         }
     }
+
+    private void NotifyStatGain(CombatState state, Player player,
+                                Stat stat, int amount){
+        int before = player.getStat(stat);
+        player.gainExp(stat, amount);
+        int after = player.getStat(stat);
+        if (after > before) state.
+                addEffect(stat.getCode().toUpperCase() + "è salita a: " + after + "!");
+    }
 }
