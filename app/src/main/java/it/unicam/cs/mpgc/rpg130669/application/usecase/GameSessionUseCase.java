@@ -1,7 +1,10 @@
-package it.unicam.cs.mpgc.rpg130669.application;
+package it.unicam.cs.mpgc.rpg130669.application.usecase;
 
+import it.unicam.cs.mpgc.rpg130669.application.CombatEngine;
+import it.unicam.cs.mpgc.rpg130669.application.FishBehaviorEngine;
 import it.unicam.cs.mpgc.rpg130669.domain.model.combat.FishingSession;
 import it.unicam.cs.mpgc.rpg130669.domain.model.combat.PlayerAction;
+import it.unicam.cs.mpgc.rpg130669.domain.model.combat.SessionState;
 import it.unicam.cs.mpgc.rpg130669.domain.model.fish.FishEntity;
 import it.unicam.cs.mpgc.rpg130669.domain.model.item.FishingRod;
 import it.unicam.cs.mpgc.rpg130669.domain.model.item.Item;
@@ -31,9 +34,9 @@ import java.util.Optional;
 public class GameSessionUseCase {
 
     private final FishBehaviorEngine fishBehaviorEngine;
-    private final CombatEngine       combatEngine;
-    private final InventoryUseCase   inventoryUseCase;
-    private final QuestUseCase       questUseCase;
+    private final CombatEngine combatEngine;
+    private final InventoryUseCase inventoryUseCase;
+    private final QuestUseCase questUseCase;
     private final SpawnService       spawnService;
     private final SaveGameRepository saveRepo;
     private final JournalRepository  journalRepo;
@@ -181,10 +184,15 @@ public class GameSessionUseCase {
     }
 
     private void concludeSession() {
-        if (activeSession.getSessionState()
-                == it.unicam.cs.mpgc.rpg130669.domain.model.combat.SessionState.CAUGHT) {
+        if (activeSession.getSessionState() == SessionState.CAUGHT) {
             FishEntity fish = activeSession.getTargetFish();
-            journalRepo.recordCatch(player.getId(), fish.getTemplate().id(), 0);
+            try {
+                journalRepo.recordCatch(player.getId(), fish.getTemplate().id(), 0);
+            } catch (RuntimeException e) {
+                // La cattura è avvenuta lo stesso — il journal è solo storico,
+                // un suo fallimento non deve bloccare il gioco.
+                System.err.println("⚠ Impossibile registrare la cattura nel journal: " + e.getMessage());
+            }
             currentMap.removeFish(fish);
         }
         activeSession    = null;

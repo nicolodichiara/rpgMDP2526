@@ -19,7 +19,7 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.player.Stat;
  *  - stateLess, i metodi sono puri
  */
 
-public class VisibiltyService {
+public class VisibilityService {
     public FishVisibility compute(FishEntity fish, Player player) {
         int delta = fish.getTemplate().perceptionThreshold()
                 - player.getStat(Stat.PERCEPTION);

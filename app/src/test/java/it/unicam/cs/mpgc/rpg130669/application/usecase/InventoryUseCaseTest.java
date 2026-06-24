@@ -1,6 +1,5 @@
 package it.unicam.cs.mpgc.rpg130669.application.usecase;
 
-import it.unicam.cs.mpgc.rpg130669.application.InventoryUseCase;
 import it.unicam.cs.mpgc.rpg130669.domain.model.item.*;
 import it.unicam.cs.mpgc.rpg130669.domain.model.map.Position;
 import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;

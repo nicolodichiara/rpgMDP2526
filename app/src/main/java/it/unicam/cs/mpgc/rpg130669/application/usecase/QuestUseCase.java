@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130669.application;
+package it.unicam.cs.mpgc.rpg130669.application.usecase;
 
 import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;
 import it.unicam.cs.mpgc.rpg130669.domain.model.quest.Quest;

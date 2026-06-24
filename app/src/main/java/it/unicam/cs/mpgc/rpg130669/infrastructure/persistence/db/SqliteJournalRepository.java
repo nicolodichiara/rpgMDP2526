@@ -24,7 +24,7 @@ public class SqliteJournalRepository implements JournalRepository {
             ps.setInt(3, weight);
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Errore nel salvataggio della cattura", e);
+            throw new RuntimeException("Errore nel salvataggio della cattura" + e.getMessage(), e);
         }
     }
 

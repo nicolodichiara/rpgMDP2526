@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg130669.application;
+package it.unicam.cs.mpgc.rpg130669.application.usecase;
 
 import it.unicam.cs.mpgc.rpg130669.domain.model.item.Bait;
 import it.unicam.cs.mpgc.rpg130669.domain.model.item.FishingRod;

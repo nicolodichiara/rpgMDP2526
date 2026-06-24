@@ -28,15 +28,14 @@ public class Player {
     private final Map<Stat, Integer> stats;
     private final Map<Stat, Integer> expPerStat;
 
-    public Player (String id, String name, Position initalPos){
-
-        this.id = Objects.requireNonNull(id, "id non può essere null");
-        this.name = Objects.requireNonNull(name, "name non può essere null");
+    public Player(String id, String name, Position initalPos) {
+        this.id        = Objects.requireNonNull(id,       "id non può essere null");
+        this.name      = Objects.requireNonNull(name,     "name non può essere null");
+        this.position  = Objects.requireNonNull(initalPos, "posizione non può essere null");  // ← aggiunta
         this.inventory = new Inventory();
-        this.stats = new EnumMap<>(Stat.class);
+        this.stats     = new EnumMap<>(Stat.class);
         this.expPerStat = new EnumMap<>(Stat.class);
-        // inizializzazione delle mappe ai valori di base
-        for (Stat i : Stat.values()){
+        for (Stat i : Stat.values()) {
             stats.put(i, STAT_BASE_VALUE);
             expPerStat.put(i, 0);
         }
