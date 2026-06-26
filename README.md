@@ -70,8 +70,8 @@ Artificial Intelligence tools were utilized during the design and development of
 
 #### Gemini
 
-* **Documentation:** Generated missing code comments during the final polishing phases of the project.
 * **Logic Refinement:** Provided a sounding board to reason through and optimize the logic of specific methods.
+* **Documentation & Polish:** Generated missing code comments during the final development phases, and assisted in translating, structuring, and formatting this README file for final presentation.
 
 ---
 
