@@ -1,8 +1,4 @@
-Ecco una versione del tuo README tradotta in inglese, ottimizzata nella formattazione e nello stile per renderla più professionale, chiara e accattivante (perfetta per un progetto scolastico o d'esame).
 
-Ho corretto alcune piccole incongruenze (come il comando `cd` che non corrispondeva esattamente al nome della cartella clonata) e strutturato la sezione AI in modo più pulito.
-
----
 
 # rpgMDP2526 - Fishing RPG
 
