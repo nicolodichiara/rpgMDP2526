@@ -2,8 +2,16 @@ package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
+
+/**
+ * GRASS        —     camminabile, non pescabile
+ * DOCK         —     camminabile,     pescabile
+ * WATER        — non camminabile,     pescabile
+ * DEEP WATER   — non camminabile,     pescabile
+ * ROCK         — non camminabile, non pescabile
+ * SAND         —     camminabile, non pescabile
+ */
 
 public enum TileType {
 

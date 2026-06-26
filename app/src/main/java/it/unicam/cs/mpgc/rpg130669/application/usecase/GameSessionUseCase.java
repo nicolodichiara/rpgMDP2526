@@ -67,6 +67,7 @@ public class GameSessionUseCase {
     }
 
     // ── inizializzazione ──────────────────────────────────────────────────────
+    // ── caricamento: salvataggio / nuova partita
 
     public void startNewGame(Player player, GameMap startMap, List<Quest> quests) {
         this.player       = Objects.requireNonNull(player);

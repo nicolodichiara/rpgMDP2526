@@ -87,12 +87,14 @@ public class AppContext {
     private Map<String, FishTemplate> buildFishTemplates() {
         BehaviorProfile common = new BehaviorProfile(0.5f, 0.3f, 0.3f, 5, 1);
         BehaviorProfile rare   = new BehaviorProfile(0.2f, 0.7f, 0.2f, 4, 2);
+        BehaviorProfile elusive = new BehaviorProfile(0.1f, 0.9f, 0.1f, 3, 3);
 
         return Map.of(
-                "trota",   new FishTemplate("trota",   "Trota",   FishRarity.COMMON,   common, 20, 20, 3, 3),
-                "carpa",   new FishTemplate("carpa",   "Carpa",   FishRarity.COMMON,   common, 25, 25, 2, 2),
-                "salmone", new FishTemplate("salmone", "Salmone", FishRarity.UNCOMMON, rare,   30, 30, 5, 6),
-                "luccio",  new FishTemplate("luccio",  "Luccio",  FishRarity.RARE,     rare,   40, 35, 7, 10)
+                "trota",    new FishTemplate("trota",    "Trota",    FishRarity.COMMON,   common,  20, 20, 3, 3),
+                "carpa",    new FishTemplate("carpa",    "Carpa",    FishRarity.COMMON,   common,  25, 25, 2, 2),
+                "salmone",  new FishTemplate("salmone",  "Salmone",  FishRarity.UNCOMMON, rare,    30, 30, 5, 6),
+                "luccio",   new FishTemplate("luccio",   "Luccio",   FishRarity.RARE,     rare,    40, 35, 7, 10),
+                "anguilla", new FishTemplate("anguilla", "Anguilla", FishRarity.RARE,     elusive, 35, 25, 6, 12)
         );
     }
 }

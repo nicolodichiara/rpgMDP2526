@@ -6,6 +6,14 @@ import it.unicam.cs.mpgc.rpg130669.domain.repository.JournalRepository;
 
 import java.util.Objects;
 
+/**
+ * funzione non implementata
+ *
+ * condizione per la cattura del pesce:
+ *  Item
+ *  LivelloGiocatore
+ */
+
 public class CatchFishCondition implements QuestCondition {
     private final String fishId;
     private final int    required;

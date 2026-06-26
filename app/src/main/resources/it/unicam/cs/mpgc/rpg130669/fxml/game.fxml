@@ -1,90 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.canvas.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.unicam.cs.mpgc.rpg130669.presentation.controller.GameController"
-            style="-fx-background-color: #1a1a2e;">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane style="-fx-background-color: #d9f6f5;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.mpgc.rpg130669.presentation.controller.GameController">
 
     <!-- TOP — HUD info -->
     <top>
-        <HBox spacing="20" style="-fx-background-color: #16213e; -fx-padding: 8 16;">
-            <Label fx:id="clockLabel"
-                   style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace'; -fx-font-size: 13;"/>
-            <Label fx:id="playerLabel"
-                   style="-fx-text-fill: #f5e642; -fx-font-family: 'Monospace'; -fx-font-size: 13;"/>
-            <Label fx:id="mapLabel"
-                   style="-fx-text-fill: #c0c0c0; -fx-font-family: 'Monospace'; -fx-font-size: 13;"/>
-            <Label fx:id="fishLabel"
-                   style="-fx-text-fill: #ff6b35; -fx-font-family: 'Monospace'; -fx-font-size: 13;"/>
+        <HBox spacing="20" style="-fx-background-color: #d9f6f5; -fx-padding: 8 16;">
+            <Label fx:id="clockLabel" style="-fx-text-fill: #000000; -fx-font-family: 'Monospace'; -fx-font-size: 13;" />
+            <Label fx:id="playerLabel" style="-fx-text-fill: #000000; -fx-font-family: 'Monospace'; -fx-font-size: 13;" />
+            <Label fx:id="mapLabel" style="-fx-text-fill: #000000; -fx-font-family: 'Monospace'; -fx-font-size: 13;" />
+            <Label fx:id="fishLabel" style="-fx-text-fill: #000000; -fx-font-family: 'Monospace'; -fx-font-size: 13;" />
         </HBox>
     </top>
 
     <!-- CENTER — mappa scrollabile -->
     <center>
-        <ScrollPane fx:id="mapScrollPane"
-                    style="-fx-background: #1a1a2e; -fx-background-color: #1a1a2e;"
-                    pannable="true" fitToWidth="false" fitToHeight="false">
+        <ScrollPane fx:id="mapScrollPane" fitToHeight="false" fitToWidth="false" pannable="true" style="-fx-background: #d9f6f5; -fx-background-color: #d9f6f5;">
             <content>
-                <StackPane fx:id="mapContainer" style="-fx-padding: 16;"/>
+                <StackPane fx:id="mapContainer" style="-fx-padding: 16;" />
             </content>
         </ScrollPane>
     </center>
 
     <!-- RIGHT — pannello azioni -->
     <right>
-        <VBox spacing="10"
-              style="-fx-background-color: #16213e; -fx-padding: 16; -fx-min-width: 200;">
+        <VBox spacing="10" style="-fx-background-color: #00fff7; -fx-padding: 16; -fx-min-width: 200;">
 
-            <Label text="AZIONI"
-                   style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace';
-                          -fx-font-size: 11; -fx-font-weight: bold;"/>
+            <Label style="-fx-text-fill: #020101; -fx-font-family: 'Monospace';                           -fx-font-size: 11; -fx-font-weight: bold;" text="MENU" />
 
-            <Button fx:id="castButton"    text="Lancia esca"   onAction="#onCast"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
-                           -fx-font-family: 'Monospace'; -fx-cursor: hand;"/>
-            <Button fx:id="saveButton"    text="Salva"         onAction="#onSave"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
-                           -fx-font-family: 'Monospace'; -fx-cursor: hand;"/>
-            <Button fx:id="changeMapButton" text="🗺 Cambia mappa" onAction="#onChangeMap"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;
-               -fx-font-family: 'Monospace'; -fx-cursor: hand;"/>
+            <Button fx:id="castButton" maxWidth="Infinity" onAction="#onCast" style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;                            -fx-font-family: 'Monospace'; -fx-cursor: hand;" text="LANCIA LA LENZA" />
+            <Button fx:id="saveButton" maxWidth="Infinity" onAction="#onSave" style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;                            -fx-font-family: 'Monospace'; -fx-cursor: hand;" text="SALVA">
+            <font>
+               <Font name="Arial" size="13.0" />
+            </font></Button>
+            <Button fx:id="changeMapButton" maxWidth="Infinity" onAction="#onChangeMap" style="-fx-background-color: #0f3460; -fx-text-fill: #e0e0e0;                -fx-font-family: 'Monospace'; -fx-cursor: hand;" text="MAPPE">
+            <font>
+               <Font name="Arial" size="13.0" />
+            </font></Button>
 
-            <Separator style="-fx-background-color: #0f3460;"/>
+            <Separator style="-fx-background-color: #0f3460;" />
 
-            <Label text="MUOVI (WASD / ↑↓←→)"
-                   style="-fx-text-fill: #606080; -fx-font-family: 'Monospace'; -fx-font-size: 10;"
-                   wrapText="true"/>
+            <Label style="-fx-text-fill: #000000; -fx-font-family: 'Monospace'; -fx-font-size: 10;" text="MUOVI (WASD / ↑↓←→)" wrapText="true" />
 
-            <Separator style="-fx-background-color: #0f3460;"/>
+            <Separator style="-fx-background-color: #0f3460;" />
 
             <!-- Log eventi -->
-            <Label text="LOG"
-                   style="-fx-text-fill: #a8d8ea; -fx-font-family: 'Monospace';
-                          -fx-font-size: 11; -fx-font-weight: bold;"/>
-            <TextArea fx:id="eventLog" editable="false" wrapText="true"
-                      prefHeight="300"
-                      style="-fx-control-inner-background: #0d0d1a;
-                             -fx-text-fill: #c0c0c0;
-                             -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
+            <Label style="-fx-text-fill: #040404; -fx-font-family: 'Monospace';                           -fx-font-size: 11; -fx-font-weight: bold;" text="CONSOLE" />
+            <TextArea fx:id="eventLog" editable="false" prefHeight="300" style="-fx-control-inner-background: #0d0d1a;                              -fx-text-fill: #c0c0c0;                              -fx-font-family: 'Monospace'; -fx-font-size: 11;" wrapText="true" />
         </VBox>
     </right>
 
     <!-- BOTTOM — stat bar -->
     <bottom>
-        <HBox spacing="16" style="-fx-background-color: #0d0d1a; -fx-padding: 6 16;">
-            <Label fx:id="perceptionLabel"
-                   style="-fx-text-fill: #80d0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
-            <Label fx:id="castingLabel"
-                   style="-fx-text-fill: #80d0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
-            <Label fx:id="strengthLabel"
-                   style="-fx-text-fill: #80d0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
-            <Label fx:id="patienceLabel"
-                   style="-fx-text-fill: #80d0c0; -fx-font-family: 'Monospace'; -fx-font-size: 11;"/>
+        <HBox spacing="16" style="-fx-background-color: d9f6f5; -fx-padding: 6 16;">
+            <Label fx:id="perceptionLabel" style="-fx-text-fill: #070707; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
+            <Label fx:id="castingLabel" style="-fx-text-fill: #020202; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
+            <Label fx:id="strengthLabel" style="-fx-text-fill: #040404; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
+            <Label fx:id="patienceLabel" style="-fx-text-fill: #000000; -fx-font-family: 'Monospace'; -fx-font-size: 11;" />
         </HBox>
     </bottom>
 

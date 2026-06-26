@@ -22,14 +22,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-/*
-  Persiste lo stato di gioco in JSON usando Gson.
-  GameMap NON viene serializzata — viene ricaricata dall'XmlMapRepository
-  usando il levelId salvato nel file del clock.
+/**
+ *   Persiste lo stato di gioco in JSON usando Gson.
+ *   GameMap NON viene serializzata — viene ricaricata dall'XmlMapRepository
+ *   usando il levelId salvato nel file del clock.
 */
 public class JsonSaveGameRepository implements SaveGameRepository {
 
-    // ── DTO — rappresentazione persistita, separata dal domain model ─────────
+    // rappresentazione persistita, separata dal domain model
 
     private record PlayerDto(
             String              id,

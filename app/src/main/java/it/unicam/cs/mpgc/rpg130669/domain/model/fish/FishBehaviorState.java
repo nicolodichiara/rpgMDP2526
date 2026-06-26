@@ -4,6 +4,13 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Stato comportamentale di un FishEntity sulla mappa.
+ *
+ * IDLE / WANDERING  → fuori dal reactionRange del giocatore
+ * NEUTRAL / ATTRACTED / SCARED / FLEEING → dentro il reactionRange
+ */
+
 public enum FishBehaviorState {
     IDLE("idle"),
     WANDERING("wandering"),

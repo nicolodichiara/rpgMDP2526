@@ -65,6 +65,7 @@ public class FishBehaviorEngine {
         });
     }
 
+    // resolver del comportamento del FishEntity
     private void move(FishEntity fish, GameMap map,
                       Position playerPos, Position castPos) {
         Position next = switch (fish.getBehaviorState()) {

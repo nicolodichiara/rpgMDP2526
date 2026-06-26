@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map id="3" name="Fiume Selvaggio" requiredLevel="1">
+
+    <grid rows="10" cols="12">
+        <!-- grass, dock, water, deep_water, rock, sand -->
+        <row>rock,  rock,  grass, grass, grass,      grass,      grass,      grass,      grass, grass, rock,  rock </row>
+        <row>rock,  grass, grass, grass, grass,      grass,      grass,      grass,      grass, grass, grass, rock </row>
+        <row>grass, grass, dock,  dock,  sand,       sand,       sand,       sand,       sand,  sand,  grass, grass</row>
+        <row>grass, grass, water, water, water,      water,      water,      water,      water, water, grass, grass</row>
+        <row>water, water, water, deep_water, deep_water, deep_water, deep_water, deep_water, deep_water, water, water, water</row>
+        <row>water, water, water, deep_water, deep_water, deep_water, deep_water, deep_water, deep_water, water, water, water</row>
+        <row>water, water, water, water, water,      water,      water,      water,      water, water, water, water</row>
+        <row>grass, grass, sand,  sand,  sand,       sand,       sand,       sand,       sand,  sand,  grass, grass</row>
+        <row>rock,  grass, grass, grass, grass,      grass,      grass,      grass,      grass, grass, grass, rock </row>
+        <row>rock,  rock,  grass, grass, grass,      grass,      grass,      grass,      grass, grass, rock,  rock </row>
+    </grid>
+
+    <spawnZones>
+        <zone topLeft="3,2" bottomRight="6,9" maxFish="6">
+            <fish template="trota"    weight="0.3"/>
+            <fish template="salmone"  weight="0.3"/>
+            <fish template="luccio"   weight="0.2"/>
+            <fish template="anguilla" weight="0.2"/>
+        </zone>
+        <zone topLeft="4,3" bottomRight="5,8" maxFish="3">
+            <fish template="anguilla" weight="0.6"/>
+            <fish template="luccio"   weight="0.4"/>
+        </zone>
+    </spawnZones>
+
+</map>

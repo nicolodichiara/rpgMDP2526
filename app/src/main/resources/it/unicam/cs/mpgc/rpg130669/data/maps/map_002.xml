@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map id="2" name="Lago Duria" requiredLevel="1">
+
+    <grid rows="20" cols="15">
+        <!-- G=grass, D=dock, W=water, R=rock, S=sand -->
+        <row>rock,  rock, rock, rock, rock, rock, rock, rock, rock,  rock, rock, rock, rock, rock, rock </row>
+        <row>rock, rock, rock , rock, grass, grass, grass, grass, grass, grass, rock, rock, rock, rock, rock </row>
+        <row>rock,  rock,grass, grass, grass, grass, grass, grass, grass, grass, grass, grass, grass, rock, rock </row>
+        <row>rock,grass, grass, grass, sand, sand, sand, sand, grass, grass, grass, grass, grass, grass, rock </row>
+
+        <row>rock,grass, grass, sand,sand,sand,sand, sand, grass, grass, grass, grass, grass, grass, rock </row>
+        <row>rock,grass, grass, grass, water, water, water, water, sand, sand, water, water, grass, grass, rock </row>
+        <row>rock,grass, grass, water, water,water, water,water, water,water, water,water, water, grass, rock </row>
+        <row>rock,grass, water, water,water, water,water, water,water, water,water, water,water, sand, rock </row>
+        <row>rock,grass, water, water,water, water,water, water,water, water,water, water,water, sand, rock </row>
+        <row>rock,grass, grass, grass, water, water, water, water, sand, sand, water, water, grass, grass, rock </row>
+
+        <row>rock,grass, grass, grass, grass, grass, grass, grass, grass, grass, grass, grass, grass, grass, rock </row>
+
+        <row>rock,grass, grass, grass, water, water, water, water, sand, sand, water, water, grass, grass, rock </row>
+        <row>rock,grass, water, water,water, water,water, water,water, water,water, water,water, sand, rock </row>
+        <row>rock,grass, water, water,water, water,water, water,water, water,water, water,water, sand, rock </row>
+        <row>rock,grass, grass, water, water,water, water,water, water,water, water,water, water, grass, rock </row>
+        <row>rock,grass, grass, grass, water, water, water, water, sand, sand, water, water, grass, grass, rock </row>
+        <row>rock,grass, grass, sand,sand,sand,sand, sand, grass, grass, grass, grass, grass, grass, rock </row>
+
+        <row>rock,  rock,grass, grass, grass, grass, grass, grass, grass, grass, grass, grass, grass, rock, rock </row>
+        <row>rock, rock, rock , rock, grass, grass, grass, grass, grass, grass, rock, rock, rock, rock, rock </row>
+        <row>rock,  rock, rock, rock, rock, rock, rock, rock, rock,  rock, rock, rock, rock, rock, rock </row>
+    </grid>
+
+    <spawnZones>
+        <zone topLeft="3,2" bottomRight="5,7" maxFish="5">
+            <fish template="trota"  weight="0.6"/>
+            <fish template="carpa"  weight="0.4"/>
+        </zone>
+        <zone topLeft="5,4" bottomRight="5,5" maxFish="2">
+            <fish template="salmone" weight="0.7"/>
+            <fish template="luccio"  weight="0.3"/>
+        </zone>
+    </spawnZones>
+</map>

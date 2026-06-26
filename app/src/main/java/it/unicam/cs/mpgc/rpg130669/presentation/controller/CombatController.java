@@ -34,7 +34,7 @@ public class CombatController {
     private GameSessionUseCase session;
     private InventoryUseCase   inventoryUseCase;
     private GameViewModel      viewModel;
-    private FishingSession     fishingSession;   // ← riferimento diretto, mai null
+    private FishingSession     fishingSession;
     private Runnable           onCombatEnd;
 
     public void init(GameSessionUseCase session,
@@ -50,8 +50,12 @@ public class CombatController {
         refresh();
     }
 
+    /**
+     * fa il refresh della sessione, di tutte le statistiche percentuali
+     * gestisce il passo successivo del turno del giocatore, disabilitando i bottoni
+     */
     private void refresh() {
-        FishingSession fs = fishingSession;   // ← non più session.getActiveSession()
+        FishingSession fs = fishingSession;
         if (fs == null) return;
 
         FishEntity fish       = fs.getTargetFish();
@@ -83,6 +87,12 @@ public class CombatController {
         }
     }
 
+    /**
+     * crea i case per la conclusione della sessione con tutti i casi possibili
+     * CAUGHT,  hai vinto il combattimento
+     * ESCAPED, il pesce è fuggito
+     * GIVE UP, ti sei arreso
+     */
     private void handleConcluded(FishingSession fs) {
         String msg = switch (fs.getSessionState()) {
             case CAUGHT   -> "Pesce catturato!";
@@ -99,6 +109,9 @@ public class CombatController {
     @FXML private void onWait()   { performAction(PlayerAction.WAIT,    null); }
     @FXML private void onGiveUp() { performAction(PlayerAction.GIVE_UP, null); }
 
+    /**
+     * gestisce l'uso della BAIT, se usata e presente ne consuma 1 qta
+     */
     @FXML
     private void onBait() {
         try {
@@ -111,6 +124,13 @@ public class CombatController {
         }
     }
 
+    /**
+     *
+     * @param action
+     * @param item
+     * metodo generale che per ogni implementazione di item,
+     * chiama la PerformCombatAction relativa e refresha la sessione
+     */
     private void performAction(PlayerAction action, Item item) {
         try {
             session.performCombatAction(action, item);
@@ -121,6 +141,9 @@ public class CombatController {
         }
     }
 
+    /**
+     * @return l'id della prima esca (quindi quella selezionata).
+     */
     private String pickBaitId() {
         return session.getPlayer().getInventory().getItemSet().stream()
                 .filter(i -> i instanceof Bait)

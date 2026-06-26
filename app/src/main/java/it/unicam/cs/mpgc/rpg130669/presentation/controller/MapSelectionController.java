@@ -51,7 +51,7 @@ public class MapSelectionController {
         if (isCurrent) {
             infoLabel.setText("Sei già in questa mappa.");
         } else if (!isUnlocked) {
-            infoLabel.setText("🔒 Richiede livello " + map.getRequiredLevel()
+            infoLabel.setText("Richiede livello " + map.getRequiredLevel()
                     + " (sei al livello " + session.getPlayer().getLevel() + ")");
         } else {
             infoLabel.setText("Pesci presenti: " + map.getActiveFish().size());

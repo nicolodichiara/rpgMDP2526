@@ -6,6 +6,12 @@ import it.unicam.cs.mpgc.rpg130669.domain.repository.JournalRepository;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Gestione delle Quest, ancora non attivo nel gioco
+ * Una quest è soddisfatta quando TUTTE le sue condizioni sono soddisfatte.
+ * rewards è una lista di stringhe descrittive — il QuestUseCase
+ * le interpreta e applica gli effetti concreti (sblocco mappa, item, ecc.).
+ */
 public class Quest {
 
     private final String id;

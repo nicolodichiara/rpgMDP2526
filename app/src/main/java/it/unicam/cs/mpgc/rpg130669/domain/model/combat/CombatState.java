@@ -32,30 +32,20 @@ public class CombatState {
         this.rodDurability = initialRodDurability;
     }
 
-    public int getVirtualDistance() {return virtualDistance;}
-    public int getRodDurability() {return rodDurability;}
-    public int getTurnCount() {return turnCount;}
-    public List<String> getActiveEffects(){return Collections.unmodifiableList(activeEffects);}
+    public int getVirtualDistance()          {return virtualDistance;}
+    public int getRodDurability()            {return rodDurability;}
+    public int getTurnCount()                {return turnCount;}
+    public List<String> getActiveEffects()   {return Collections.unmodifiableList(activeEffects);}
 
-    public void increaseDistance(int amount) {
-        virtualDistance = Math.min(MAX_DISTANCE, virtualDistance + amount);
-    }
-    public void decreaseDistance(int amount) {
-        virtualDistance = Math.max(0, virtualDistance - amount);
-    }
-    public void damageRod(int amount){
-        rodDurability = Math.max(0, rodDurability - amount);
-    }
-    public void addEffect(String effectDescription){
-        activeEffects.add(effectDescription);
-    }
-    public void clearEffects() {
-        activeEffects.clear();
-    }
-    public void incrementTurn() {turnCount++;}
+    public void increaseDistance(int amount)        {virtualDistance = Math.min(MAX_DISTANCE, virtualDistance + amount);}
+    public void decreaseDistance(int amount)        {virtualDistance = Math.max(0, virtualDistance - amount);}
+    public void damageRod(int amount)               {rodDurability = Math.max(0, rodDurability - amount);}
+    public void addEffect(String effectDescription) {activeEffects.add(effectDescription);}
+    public void clearEffects()                      {activeEffects.clear();}
+    public void incrementTurn()                     {turnCount++;}
 
-    public boolean isRodBroken()    { return rodDurability   <= 0; }
-    public boolean isFishTooFar()   { return virtualDistance >= MAX_DISTANCE; }
+    public boolean isRodBroken()                    { return rodDurability   <= 0; }
+    public boolean isFishTooFar()                   { return virtualDistance >= MAX_DISTANCE; }
 }
 
 

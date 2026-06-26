@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * rarità del pesce:
+ * il campo level permette il confronto cardinale fra le rarità
+ */
 public enum FishRarity {
 
     @SerializedName("common")    COMMON   ("common",    1),

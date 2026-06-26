@@ -6,6 +6,17 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Statistiche skill-based del giocatore.
+ * Ogni stat cresce usando quella stat — non c'è XP globale.
+ *
+ * PERCEPTION  — amplia FishVisibility, aumenta reactionRange percepito
+ * CASTING     — distanza e precisione del lancio
+ * STRENGTH    — efficacia di PULL in combattimento
+ * PATIENCE    — riduce probabilità di fuga del pesce durante WAIT
+ * CRAFTING    — sblocca ricette e qualità degli item craftati (V2)
+ */
+
 public enum Stat {
 
     @SerializedName("perception") PERCEPTION("perception"),

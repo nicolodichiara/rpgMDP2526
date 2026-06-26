@@ -4,6 +4,12 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.map.Position;
 
 import java.util.Objects;
 
+/**
+ * Istanza viva di un pesce sulla mappa.
+ * Wrappa un FishTemplate (dati statici) e aggiunge lo stato runtime:
+ * posizione corrente, stato comportamentale, hp e stamina residui.
+ */
+
 public class FishEntity {
     private Position position;
     private FishBehaviorState behaviorState;
@@ -17,6 +23,16 @@ public class FishEntity {
         this.behaviorState  = FishBehaviorState.IDLE;
         this.hp             = template.baseHp();
         this.stamina        = template.baseStamina();
+    }
+
+    // metodi di stato del pesce
+    //-------------------------------------------------------------------------------------------------------------------------------------
+    public boolean isDefeated(){return hp <= 0;}
+    public boolean isExhausted(){return stamina <= 0;}
+
+    // presente qui e non nell'engine perchè risponde a una query sul pesce stesso
+    public boolean isOutOfRange(Position playerPos) {
+        return position.distanceTo(playerPos) > template.behaviorProfile().reactionRange();
     }
 
     // getter - setter generati con l'ausilio di AI
@@ -47,13 +63,5 @@ public class FishEntity {
         stamina = Math.max(0, stamina - amount);
     }
 
-    // metodi di stato del pesce
-    //-------------------------------------------------------------------------------------------------------------------------------------
-    public boolean isDefeated(){return hp <= 0;}
-    public boolean isExhausted(){return stamina <= 0;}
 
-    // presente qui e non nell'engine perchè risponde a una query sul pesce stesso
-    public boolean isOutOfRange(Position playerPos) {
-        return position.distanceTo(playerPos) > template.behaviorProfile().reactionRange();
-    }
 }

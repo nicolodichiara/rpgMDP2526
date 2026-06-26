@@ -4,6 +4,7 @@ import it.unicam.cs.mpgc.rpg130669.application.usecase.GameSessionUseCase;
 import it.unicam.cs.mpgc.rpg130669.application.usecase.InventoryUseCase;
 import it.unicam.cs.mpgc.rpg130669.domain.model.combat.FishingSession;
 import it.unicam.cs.mpgc.rpg130669.domain.model.map.Position;
+import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;
 import it.unicam.cs.mpgc.rpg130669.domain.model.player.Stat;
 import it.unicam.cs.mpgc.rpg130669.domain.repository.MapRepository;
 import it.unicam.cs.mpgc.rpg130669.domain.service.VisibilityService;
@@ -69,13 +70,17 @@ public class GameController {
     }
 
 
-    // ── setup ─────────────────────────────────────────────────────────────────
+    /**
+     * fa il setup per il map render, dopo permette di selezionare la Tile dove eseguire il lancio
+     * stampa a console la tile selezionata.
+     * Click su una tile → seleziona come target del cast
+     */
 
     private void setupMapRenderer() {
         mapRenderer = new MapRenderer();
         mapContainer.getChildren().add(mapRenderer);
 
-        // Click su una tile → seleziona come target del cast
+        //
         mapRenderer.setOnMouseClicked(e -> {
             int col = (int)(e.getX() / mapRenderer.getTileSize());
             int row = (int)(e.getY() / mapRenderer.getTileSize());
@@ -84,6 +89,9 @@ public class GameController {
         });
     }
 
+    /**
+     * setup per l'interpretazione degli input da tastiera per javaFx
+     */
     private void setupKeyboardInput() {
         // Il focus deve stare sul container per ricevere i tasti
         mapScrollPane.setOnKeyPressed(this::handleKey);
@@ -92,12 +100,16 @@ public class GameController {
         javafx.application.Platform.runLater(mapScrollPane::requestFocus);
     }
 
+    /**
+     * gestisce il contenuto del testo visualizzato, del
+     * clock, player, fishCount
+     * aggiorna la mappa quando la griglia cambia
+     */
     private void bindViewModel() {
         clockLabel .textProperty() .bind(viewModel.clockLabelProperty());
         playerLabel.textProperty().bind(viewModel.playerLabelProperty());
         fishLabel.textProperty().bind(viewModel.fishCountLabelProperty());
 
-        // Aggiorna mappa quando la griglia cambia
         viewModel.tileGridProperty().addListener((obs, old, grid) -> {
             var map = session.getCurrentMap();
             mapRenderer.render(grid,
@@ -108,8 +120,10 @@ public class GameController {
         });
     }
 
-    // ── input ─────────────────────────────────────────────────────────────────
-
+    /**
+     * case per la gestione dell'input da tastiera, che associa i valori delle frecce a quelli delle lettere
+     * chiamano position.traslate per spostare fisicamente il giocatore a una nuova posizione
+     */
     private void handleKey(KeyEvent e) {
         if (session.getActiveSession() != null
                 && session.getActiveSession().isActive()) return;
@@ -129,17 +143,22 @@ public class GameController {
             session.movePlayer(dest);
             viewModel.refresh();
         } catch (IllegalArgumentException ex) {
-            // Tile non camminabile o fuori mappa — silenzioso
+            // Tile non camminabile o fuori mappa - (non esce a console)
         }
         e.consume();
     }
 
-    // ── azioni FXML ──────────────────────────────────────────────────────────
+    // AZIONI FXML
 
+    /**
+     * gestione dell'esecuizione del btn 'lancia', se la posizione è non null, salva la sessione e successivamente la aggiorna.
+     * Se nella sessione salvata, risulta che il lancio è avvenuto dove c'è un pesce inizia il combattimento.
+     * sennò si continua con la sessione refreshata
+     */
     @FXML
     private void onCast() {
         if (selectedCastTarget == null) {
-            appendLog("⚠ Clicca sulla mappa per selezionare il punto di lancio.");
+            appendLog("Clicca sulla mappa per selezionare il punto di lancio.");
             return;
         }
         try {
@@ -148,27 +167,33 @@ public class GameController {
             selectedCastTarget = null;
 
             if (maybeSession.isPresent()) {
-                appendLog("🎣 Pesce agganciato! Inizia il combattimento.");
+                appendLog("Pesce agganciato! Inizia il combattimento.");
                 openCombatWindow(maybeSession.get());   // ← passa l'oggetto, non solo il booleano
             } else {
-                appendLog("🌊 Esca lanciata — nessun pesce su quella tile.");
+                appendLog("Esca lanciata — nessun pesce su quella tile.");
             }
         } catch (Exception ex) {
-            appendLog("⚠ " + ex.getMessage());
+            appendLog(" attenzione " + ex.getMessage());
         }
     }
 
-
+    /**
+     * gestione dell'esecuzione del btn 'save'
+     */
     @FXML
     private void onSave() {
         try {
             session.save();
-            appendLog("💾 Partita salvata.");
+            appendLog("Partita salvata.");
         } catch (Exception ex) {
-            appendLog("⚠ Errore nel salvataggio: " + ex.getMessage());
+            appendLog("Errore nel salvataggio: " + ex.getMessage());
         }
     }
 
+    /**
+     * gestione dell'esecuzione del btn 'cambia mappa'. Carica il pacchetto delle risorse per la selezione delle map
+     * se cambia la mappa di istanzia un nuovo Stage.
+     */
     @FXML
     private void onChangeMap() {
         try {
@@ -179,7 +204,7 @@ public class GameController {
             MapSelectionController msc = loader.getController();
             msc.init(session, mapRepository, () -> {
                 viewModel.refresh();
-                appendLog("🗺 Mappa cambiata: " + session.getCurrentMap().getName());
+                appendLog("Mappa cambiata: " + session.getCurrentMap().getName());
             });
 
             Stage mapStage = new Stage();
@@ -192,11 +217,18 @@ public class GameController {
 
             mapScrollPane.requestFocus();
         } catch (Exception e) {
-            appendLog("⚠ Errore nell'apertura del menu mappe: " + e.getMessage());
+            appendLog("Errore nell'apertura del menu mappe: " + e.getMessage());
         }
     }
 
-    // ── finestra combattimento ────────────────────────────────────────────────
+    /**
+     * Carica la sessione di combattimento, quindi chiama il file combat.fxml
+     * istanzia il controller e ne fa l'init.
+     * finito il combattimento fa il refresh,
+     * controlla le quest,
+     * controlla se avvenuta la cattura di tutti i pesci della mappa
+     * ri-carica la sessione di pesca
+     */
 
     private void openCombatWindow(FishingSession fishingSession) {
         try {
@@ -214,8 +246,8 @@ public class GameController {
                     mapScrollPane.requestFocus();
 
                     if (session.consumeMapClearedFlag()) {
-                        appendLog("🏆 Hai catturato tutti i pesci di " + session.getCurrentMap().getName()
-                                + "! Usa '🗺 Cambia mappa' per esplorare altrove.");
+                        appendLog("Hai catturato tutti i pesci di " + session.getCurrentMap().getName()
+                                + "! Usa 'Cambia mappa' per esplorare altrove.");
                     }
                 });
             });
@@ -229,12 +261,13 @@ public class GameController {
             combatStage.show();
 
         } catch (Exception e) {
-            appendLog("⚠ Errore nell'apertura del combattimento: " + e.getMessage());
+            appendLog("Errore nell'apertura del combattimento: " + e.getMessage());
         }
     }
-    // ── aggiornamento UI ──────────────────────────────────────────────────────
 
-
+    /**
+     * update delle statistiche nella scritta a output
+     */
     private void updateStatBar() {
         var player = session.getPlayer();
         perceptionLabel.setText(formatStat("PERC", Stat.PERCEPTION, player));
@@ -243,8 +276,10 @@ public class GameController {
         patienceLabel.setText(formatStat("PAT",  Stat.PATIENCE,  player));
     }
 
-    private String formatStat(String label, Stat stat,
-                              it.unicam.cs.mpgc.rpg130669.domain.model.player.Player player) {
+    /**
+     * @return stringa formattata con la percentuale per il superamento del livello per la stat
+     */
+    private String formatStat(String label, Stat stat, Player player) {
         int progressPercent = (int) Math.round(player.getStatProgress(stat) * 100);
         return label + ": " + player.getStat(stat) + " (" + progressPercent + "%)";
     }

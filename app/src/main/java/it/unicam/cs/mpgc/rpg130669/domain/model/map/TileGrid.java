@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Griglia di Tile, generata con tile di default, o da file XML
+ * Gestisce i controlli su Position
+ */
+
 public class TileGrid {
 
     private final Tile[][] grid;
@@ -11,7 +16,12 @@ public class TileGrid {
     private final int cols;
 
 
-    //costruttore che setta ogni Tile con quella di default
+    /**
+     * costruttore che crea la griglia con Tile di default
+     * @param rows
+     * @param cols
+     * @param defaultTile
+     */
     public TileGrid(int rows, int cols, Tile defaultTile){
 
         gridCheck(rows, cols, defaultTile);
@@ -27,11 +37,13 @@ public class TileGrid {
         }
     }
 
-    // costruttore che prende la conformazione della griglia da file xml e ne fa una copia
+    /**
+     * costruttore che prende la conformazione della griglia da file xml e ne fa una copia
+     * @param tiles
+     */
     public TileGrid(Tile[][] tiles){
         Objects.requireNonNull(tiles, "tiles non deve essere null");
-        
-        // Aggiungi questa validazione
+
         if (tiles.length == 0) {
             throw new IllegalArgumentException("L'array tiles non può essere vuoto");
         }
@@ -70,20 +82,27 @@ public class TileGrid {
         grid[position.row()][position.col()] = tile;
     }
 
-    // Alternativa con coordinate separate
+    /**
+     * Alternativa con coordinate separate
+     */
+
     public Tile getTile(int row, int col) {
         return getTile(new Position(row, col));
     }
 
-    // controllo sulla posizione
+    /**
+     * controllo sulla posizione
+     */
+
     public boolean isValid(Position position){
         return position != null
                 && (position.row() >= 0 && position.row() < rows)  // Corretto: AND
                 && (position.col() >= 0 && position.col() < cols); // Corretto: AND
     }
 
-    // lista delle posizioni occupate vicino un'entità (8 caselle adiacenti)
-   
+    /**
+     * lista delle posizioni occupate vicino un'entità (8 caselle adiacenti)
+     */
     public List<Position> getNeighbors(Position pos){
         
         validatePositions(pos);

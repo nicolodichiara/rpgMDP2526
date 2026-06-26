@@ -1,7 +1,9 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
-    //   non vengono effettuati controlli di validità sui valori nei metodi
-    //   che vanno a cambiare il valore della posizione (responsabilità esterna)
+/**
+ * Posizione applicata sia al FishEntity che a Player.
+ * Coordinata immutabile (riga, colonna) sulla griglia di gioco.
+ */
 public record Position(int row, int col) {
 
     public Position translate(int dRow, int dCol){
@@ -10,11 +12,9 @@ public record Position(int row, int col) {
         return new Position(this.row+dRow, this.col+dCol);
     }
 
-
-    //   Movimento in 8 direzioni: Rappresenta il numero minimo di mosse
-    //   necessarie per raggiungere un punto da un altro, considerando che puoi
-    //   muoverti in tutte le 8 direzioni (orizzontale, verticale e diagonale)
-
+    /**
+     * distanza minima su otto direzioni (sopra-sotto, dx-sx, diagonali) chiamata distanza Chebyshev
+     */
     public int distanceTo(Position other){
         return Math.max(Math.abs(this.col - other.col),Math.abs(this.row - other.row));
     }

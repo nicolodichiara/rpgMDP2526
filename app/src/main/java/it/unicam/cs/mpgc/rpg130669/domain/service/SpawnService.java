@@ -25,6 +25,10 @@ public class SpawnService {
         this.random = random;
     }
 
+    /**
+     * popola la mappa di gioco con FishEntity nelle rispettive aree di Spawn
+     */
+
     public void populate(GameMap map, WorldClock clock){
         for (SpawnZone zone : map.getSpawnZones()){
             long fishInZone = map.getActiveFish().stream()
@@ -38,6 +42,12 @@ public class SpawnService {
             }
         }
     }
+
+    /**
+     * Moltiplica il peso totale dei pesci nella FishPool(pesci totali) con un doubleRandom (0.0 - 1-0).
+     * Quindi aggiunge entità fino a che il peso non ha raggiunto quella soglia.
+     * @param zone Zona di spawn, che contiene l'insieme dei pesci.
+     */
 
     private FishTemplate selectWeighted(SpawnZone zone){
         double total = zone.getFishPool().stream()

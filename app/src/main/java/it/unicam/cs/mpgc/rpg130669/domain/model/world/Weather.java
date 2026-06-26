@@ -1,6 +1,13 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.world;
 
 import com.google.gson.annotations.SerializedName;
+/**
+ * Determina il ciclo meteorologico, determina anche l'accesibilità alla mappa stessa
+ *     CLEAR    —     accessibile
+ *     CLOUDY   —     accessibile
+ *     RAIN     —     accessibile
+ *     STORM    — non accessibile
+ */
 
 import java.util.Arrays;
 import java.util.Map;

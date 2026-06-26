@@ -1,10 +1,10 @@
 package it.unicam.cs.mpgc.rpg130669.presentation.view;
 
-
-
-//    mapping TileType -> colore di rendering,
-//    In V2 sostituisci getColor() con getImage() che carica
-//    un tile da un tilesheet PNG — nessun'altra classe cambia.
+/**
+ * mapping TileType -> colore di rendering,
+ * In V2 sostituisci getColor() con getImage() che carica
+ * un tile da un tilesheet PNG — nessun'altra classe cambia.
+ */
 
 import it.unicam.cs.mpgc.rpg130669.domain.model.map.TileType;
 import javafx.scene.paint.Color;

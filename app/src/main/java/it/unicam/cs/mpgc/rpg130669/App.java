@@ -15,11 +15,21 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.util.List;
-
+/**
+ * punto di partenza del progetto, che si basa su AppContext
+ */
 public class App extends Application {
 
     private AppContext context;
 
+
+    /**
+     * set-up per l'inizio del gioco, vede se presente un salvataggio e in caso carica la schermata.
+     * in caso di nuova partita genera un
+     * player nella posizione 2,2
+     * fishingRod base.
+     * Infine carica il gioco
+     */
     @Override
     public void start(Stage stage) throws Exception {
         context = new AppContext();
@@ -37,8 +47,7 @@ public class App extends Application {
                     .orElseThrow(() -> new RuntimeException("map_001.xml non trovata"));
             context.getGameSessionUseCase().startNewGame(player, startMap, List.of());
 
-            var rod = new it.unicam.cs.mpgc.rpg130669.domain.model.item
-                    .FishingRod("rod_start", "Canna del Principiante", "desc", 80, 4, 4);
+            var rod = new FishingRod("rod_start", "Canna del Principiante", "desc", 80, 4, 4);
             context.getInventoryUseCase().addItem(rod, player, 1);
         }
 
@@ -50,13 +59,15 @@ public class App extends Application {
         gc.init(context.getGameSessionUseCase(),
                 context.getInventoryUseCase(),
                 context.getVisibilityService(),
-                context.getMapRepository());   // ← nuovo parametro, serve al menu mappe
-
+                context.getMapRepository());
         stage.setTitle("Fishing RPG");
         stage.setScene(new Scene(root, 1100, 700));
         stage.show();
     }
 
+    /**
+     * nova partita / carica salvataggio
+     */
     private boolean askContinueOrNewGame() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Fishing RPG");

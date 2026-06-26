@@ -9,8 +9,10 @@ import java.util.Objects;
     /**
      * Sessione di pesca attiva tra un giocatore e un pesce target.
      * Gestisce il flusso dei turni e lo stato della sessione.
+     *
      * La logica di risoluzione delle azioni è delegata al CombatEngine
-     * nel layer application — questa classe è solo il modello dati.
+     * nel layer application-
+     * Questa classe è solo il modello dati.
      */
     public class FishingSession {
 

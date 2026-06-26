@@ -2,7 +2,10 @@ package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
 import java.util.Objects;
 
-//singola cella della mappa, delega i comportamenti a TileType
+/**
+ * Singola cella della mappa, delega i comportamenti a TileType
+ */
+
 
 public record Tile(TileType type) {
     public Tile {

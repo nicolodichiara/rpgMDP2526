@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository per la gestione di SQlite gestisce:
+ * - Memorizzazione delle catture
+ * - Conteggio delle catture
+ * - record personale
+ * - Pesci scoperti fino a quel momento dal giocatore
+ */
 public class SqliteJournalRepository implements JournalRepository {
 
     private final Connection conn;
@@ -28,6 +35,9 @@ public class SqliteJournalRepository implements JournalRepository {
         }
     }
 
+    /**
+     * @return numero di pesci "fishId" pescati da "playerId"
+     */
     @Override
     public int getCatchCount(String playerId, String fishId) {
         String sql = "SELECT COUNT(*) FROM catch_log WHERE player_id=? AND fish_id=?";
@@ -41,6 +51,9 @@ public class SqliteJournalRepository implements JournalRepository {
         }
     }
 
+    /**
+     * @return Peso massimo di quel "fishId" preso da "playerId"
+     */
     @Override
     public Optional<Integer> getRecord(String playerId, String fishId) {
         String sql = "SELECT MAX(weight) FROM catch_log WHERE player_id=? AND fish_id=?";
@@ -55,6 +68,10 @@ public class SqliteJournalRepository implements JournalRepository {
             throw new RuntimeException("Errore nel recupero del record", e);
         }
     }
+
+    /**
+     * @return Lista di tutti i "fishId" scoperti dal giocatore "playerId"
+     */
 
     @Override
     public List<String> getDiscoveredFishIds(String playerId) {

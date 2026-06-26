@@ -6,6 +6,16 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Tempi della giornata che si alternano ciclicamente
+ * DAWN
+ * MORNING
+ * NOON
+ * AFTERNOON
+ * DUSK
+ * NIGHT
+ */
+
 public enum TimeOfDay {
 
     @SerializedName("dawn")      DAWN     ("dawn",      0),

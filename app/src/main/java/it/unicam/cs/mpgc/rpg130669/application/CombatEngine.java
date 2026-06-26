@@ -123,6 +123,7 @@ public class CombatEngine {
         if (session.isActive()) session.toPlayerTurn();
     }
 
+    // selettore randomico, per azione del pesce
     private FishAction selectFishAction(FishEntity fish) {
         float fear = fish.getTemplate().behaviorProfile().fearThreshold();
         double roll = random.nextDouble();
@@ -132,6 +133,8 @@ public class CombatEngine {
         if (roll < fear * 0.7 + 0.15) return FishAction.BITE_HARDER;
         return FishAction.TIRE;
     }
+
+    // resolver dei case:
 
     private void resolveStruggle(CombatState state) {
         state.damageRod(STRUGGLE_ROD_DAMAGE);

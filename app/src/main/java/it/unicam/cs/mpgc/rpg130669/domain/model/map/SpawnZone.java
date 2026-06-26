@@ -1,18 +1,14 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
-/*
-    Delimita la zona dove avviene lo spawn dei pesci
-
-    Definita da un rettangolo di cui sappiamo il 'top-left' e il 'bottom-right'
-
-    WeightedFish associa un FishTemplate a un peso relativo usato
-    dallo SpawnService per la selezione casuale pesata.
+/**
+ * Delimita la zona dove avviene lo spawn dei Pesci:
+ * Definita da un rettangolo di cui sappiamo il 'top-left' e il 'bottom-right'
+ * WeightedFish associa un FishTemplate a un peso relativo usato
+ * dallo SpawnService per la selezione casuale pesata.
  */
 
 
 import it.unicam.cs.mpgc.rpg130669.domain.model.fish.FishTemplate;
-import it.unicam.cs.mpgc.rpg130669.domain.model.world.Weather;
-import javafx.scene.transform.Transform;
 
 import java.util.List;
 import java.util.Objects;
@@ -40,6 +36,9 @@ public class SpawnZone {
                 && pos.col() >= topLeft.col() && pos.col() <= bottomRight.col();
     }
 
+    /**
+     * @return area di spawn
+     */
     public int area() {
         return (bottomRight.row() - topLeft.row() + 1)
                 * (bottomRight.col() - topLeft.col() + 1);

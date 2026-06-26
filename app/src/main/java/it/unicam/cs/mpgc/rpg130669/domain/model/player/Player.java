@@ -3,15 +3,14 @@ import  it.unicam.cs.mpgc.rpg130669.domain.model.map.Position;
 
 import java.util.*;
 
-/*
-    il player conserva:
-    - position
-    - progressione
-    - stat
-    - inventario
-
-    la progresssione dei livelli funziona in modo indipendente per ogni skill.
-    Il livello = media ponderata dei lv skill
+/**
+ * il player conserva:
+ *     - position
+ *     - progressione
+ *     - stat
+ *     - inventario
+ *     la progresssione dei livelli funziona in modo indipendente per ogni skill.
+ *     Il livello = media ponderata dei lv skill
  */
 
 
@@ -41,11 +40,11 @@ public class Player {
         }
     }
 
-    /*
-      Costruttore di ripristino usato da SaveGameRepository per
-      ricreare un Player da uno stato salvato con valori esatti
-      (non tramite gainXp, che è incrementale).
-      L'inventario viene popolato separatamente dal repository.
+    /**
+     * Costruttore di ripristino usato da SaveGameRepository per
+     * ricreare un Player da uno stato salvato con valori esatti
+     * (non tramite gainXp, che è incrementale).
+     * L'inventario viene popolato separatamente dal repository.
      */
     public Player(String id, String name, Position position,
                   Map<Stat, Integer> stats, Map<Stat, Integer> xpPerStat) {
@@ -61,29 +60,9 @@ public class Player {
         this.expPerStat.putAll(Objects.requireNonNull(xpPerStat, "xpPerStat non può essere null"));
     }
 
-    // getter AI-generated
-
-    public String    getId()        { return id;        }
-    public String    getName()      { return name;      }
-    public Position  getPosition()  { return position;  }
-    public Inventory getInventory() { return inventory; }
-
-    public int getStat(Stat stat) {
-        return stats.get(Objects.requireNonNull(stat));
-    }
-
-    public int getXp(Stat stat) {
-        return expPerStat.get(Objects.requireNonNull(stat));
-    }
-
-    public Map<Stat, Integer> getAllStats() {
-        return Collections.unmodifiableMap(stats);
-    }
-
-    // fine AI
-
-    // livello generale del giocatore (media delle statistiche)
-
+    /**
+     * livello generale del giocatore (media delle statistiche)
+     */
     public int getLevel(){
         return (int) stats.values()
                 .stream()
@@ -96,13 +75,12 @@ public class Player {
         this.position = Objects.requireNonNull(pos, "posizione non deve essere null");
     }
 
-    /* aggiunta di exp a una determinata statistica
-
-        3 casi:
-        - 1) la skill == lv max, non aumento l'esperienza
-        - 2) la exp + value > EXP_VALUE_PER_LVL aumento lv
-        - 3) aumento l'exp
-
+    /**
+     * aggiunta di exp a una determinata statistica
+     *         3 casi:
+     *         - 1) la skill == lv max, non aumento l'esperienza
+     *         - 2) la exp + value > EXP_VALUE_PER_LVL aumento lv
+     *         - 3) aumento l'exp
      */
 
     public void gainExp(Stat stat, int value) {
@@ -140,8 +118,9 @@ public class Player {
         return currentExp;
     }
 
-    // metodo che ritorna il progresso dell'exp
-    // di una statistica in forma percentuale
+    /**
+     *  metodo che ritorna il progresso dell'exp di una statistica in forma percentuale
+     */
     public double getStatProgress(Stat stat){
         if (checkMaxLvl(stat)) return 1.0;
             else return (double) getXp(stat) / EXP_VALUE_PER_LVL;
@@ -149,5 +128,25 @@ public class Player {
     public boolean checkMaxLvl(Stat stat) {
         return (stats.get(stat) >= STAT_MAX_VALUE);
     }
+
+    // getter AI-generated
+
+    public String    getId()        { return id;        }
+    public String    getName()      { return name;      }
+    public Position  getPosition()  { return position;  }
+    public Inventory getInventory() { return inventory; }
+
+    public int getStat(Stat stat) {
+        return stats.get(Objects.requireNonNull(stat));
+    }
+
+    public int getXp(Stat stat) {
+        return expPerStat.get(Objects.requireNonNull(stat));
+    }
+
+    public Map<Stat, Integer> getAllStats() {
+        return Collections.unmodifiableMap(stats);
+    }
+
 }
 
