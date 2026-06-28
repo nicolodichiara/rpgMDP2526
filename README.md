@@ -78,4 +78,4 @@ Artificial Intelligence tools were utilized during the design and development of
 
 ## Documentation & Resources
 
-For more detailed information, please visit the <wiki del progetto>
+For more detailed information, please visit the wiki
