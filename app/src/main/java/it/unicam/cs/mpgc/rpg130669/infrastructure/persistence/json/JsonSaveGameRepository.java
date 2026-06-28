@@ -23,13 +23,13 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- *   Persiste lo stato di gioco in JSON usando Gson.
- *   GameMap NON viene serializzata — viene ricaricata dall'XmlMapRepository
- *   usando il levelId salvato nel file del clock.
-*/
+ * Persists the game state to JSON using Gson.
+ * GameMap is NOT serialized — it is reloaded from the XmlMapRepository
+ * using the levelId saved in the clock file.
+ */
 public class JsonSaveGameRepository implements SaveGameRepository {
 
-    // rappresentazione persistita, separata dal domain model
+    // Persisted representation, decoupled from the domain model
 
     private record PlayerDto(
             String              id,
@@ -123,7 +123,7 @@ public class JsonSaveGameRepository implements SaveGameRepository {
         }
     }
 
-    // ── mapping domain ↔ DTO ─────────────────────────────────────────────────
+    // mapping domain <-> DTO
 
     private PlayerDto toPlayerDto(Player player) {
         List<ItemStackDto> items = new ArrayList<>();

@@ -22,14 +22,14 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Orchestratore principale del loop di gioco.
- * Ogni metodo pubblico rappresenta un'azione del giocatore e segue
- * sempre lo stesso schema:
- *   1. valida la precondizione
- *   2. applica l'effetto sul dominio
- *   3. aggiorna FishBehaviorEngine
- *   4. avanza il WorldClock
- *   5. verifica quest
+ * Main orchestrator of the game loop.
+ * Each public method represents a player action and always
+ * follows the same pattern:
+ * 1. validates the precondition
+ * 2. applies the effect on the domain
+ * 3. updates the FishBehaviorEngine
+ * 4. advances the WorldClock
+ * 5. verifies quests
  */
 public class GameSessionUseCase {
 
@@ -41,7 +41,7 @@ public class GameSessionUseCase {
     private final SaveGameRepository saveRepo;
     private final JournalRepository  journalRepo;
 
-    // ── stato corrente di sessione ────────────────────────────────────────────
+    // current state session
     private Player          player;
     private GameMap         currentMap;
     private WorldClock      clock;
@@ -66,8 +66,8 @@ public class GameSessionUseCase {
         this.journalRepo        = journalRepo;
     }
 
-    // ── inizializzazione ──────────────────────────────────────────────────────
-    // ── caricamento: salvataggio / nuova partita
+    // initialization
+    // loading game / new game
 
     public void startNewGame(Player player, GameMap startMap, List<Quest> quests) {
         this.player       = Objects.requireNonNull(player);
@@ -88,11 +88,11 @@ public class GameSessionUseCase {
         return true;
     }
 
-    // ── azioni del giocatore ──────────────────────────────────────────────────
+    // player action
 
     /**
-     * Muove il giocatore in una posizione adiacente.
-     * @throws IllegalArgumentException se la destinazione non è walkable o adiacente
+     * Moves the player to an adjacent position.
+     * @throws IllegalArgumentException if the destination is not walkable or adjacent
      */
     public void movePlayer(Position destination) {
         requireNoActiveSession();
@@ -108,8 +108,8 @@ public class GameSessionUseCase {
     }
 
     /**
-     * Lancia l'esca su una tile d'acqua entro il range della canna.
-     * Avvia una FishingSession se c'è un pesce sulla tile bersaglio.
+     * Casts the bait onto a water tile within the rod's range.
+     * Starts a FishingSession if there is a fish on the target tile.
      */
     public Optional<FishingSession> cast(Position target) {
         requireNoActiveSession();
@@ -136,8 +136,8 @@ public class GameSessionUseCase {
     }
 
     /**
-     * Esegue un'azione del giocatore nel combattimento attivo.
-     * Dopo l'azione del giocatore, risolve automaticamente il turno del pesce.
+     * Executes a player action in active combat.
+     * After the player's action, automatically resolves the fish's turn.
      */
     public void performCombatAction(PlayerAction action, Item usedItem) {
         requireActiveSession();
@@ -152,8 +152,6 @@ public class GameSessionUseCase {
         afterAction();
     }
 
-    // ── navigazione tra mappe ─────────────────────────────────────────────────
-
     public boolean changeMap(GameMap newMap) {
         if (!player.canAccessMap(newMap.getRequiredLevel())) return false;
         currentMap       = newMap;
@@ -164,13 +162,13 @@ public class GameSessionUseCase {
         return true;
     }
 
-    // ── persistenza ───────────────────────────────────────────────────────────
+    // persistence
 
     public void save() {
         saveRepo.save(player, currentMap, clock);
     }
 
-    // ── getter per la presentation layer ─────────────────────────────────────
+    // getter for the presentation layer
 
     public Player         getPlayer()        { return player;        }
     public GameMap        getCurrentMap()    { return currentMap;    }
@@ -178,9 +176,9 @@ public class GameSessionUseCase {
     public FishingSession getActiveSession() { return activeSession; }
     public List<Quest>    getActiveQuests()  { return activeQuests;  }
 
-    // ── privati ───────────────────────────────────────────────────────────────
+    // private
 
-    /** Operazioni comuni dopo ogni azione: fish AI, clock, quest. */
+    /** Common operations after each action: fish AI, clock, quest. */
     private void afterAction() {
         fishBehaviorEngine.update(currentMap, player.getPosition(), lastCastPosition);
         clock.advance();
@@ -193,12 +191,12 @@ public class GameSessionUseCase {
             try {
                 journalRepo.recordCatch(player.getId(), fish.getTemplate().id(), 0);
             } catch (RuntimeException e) {
-                System.err.println("⚠ Impossibile registrare la cattura nel journal: " + e.getMessage());
+                System.err.println(" Impossibile registrare la cattura nel journal: " + e.getMessage());
             }
             currentMap.removeFish(fish);
 
             if (currentMap.isCleared()) {
-                mapJustCleared = true;   // ← si alza esattamente al momento della transizione
+                mapJustCleared = true;
             }
         }
         activeSession    = null;
@@ -206,9 +204,9 @@ public class GameSessionUseCase {
     }
 
     /**
-     * Consuma il flag di "livello completato": ritorna true solo la prima
-     * volta che viene letto dopo che l'ultimo pesce della mappa è stato
-     * catturato. La presentation layer lo controlla dopo ogni combattimento.
+     * Consumes the "level completed" flag: returns true only the first
+     * time it is read after the last fish on the map has been caught.
+     * The presentation layer checks it after each combat.
      */
     public boolean consumeMapClearedFlag() {
         boolean wasCleared = mapJustCleared;

@@ -5,10 +5,10 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;
 import java.util.Optional;
 
 /**
- * Gestisce la porta di output per i dati del giocatore
- * Implementata nel layer infrastracture.persistence.json
+ * Handles the output port for player data.
+ * Implemented in the infrastructure.persistence.json layer.
  * ----
- * Optional usato per gestire il mancato caricamento e quindi le NullPointerException()
+ * Optional is used to handle failed loading scenarios and avoid NullPointerExceptions.
  */
 public interface CharacterRepository {
     void   save(Player player);

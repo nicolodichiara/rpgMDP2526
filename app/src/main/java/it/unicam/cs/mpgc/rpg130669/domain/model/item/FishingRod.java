@@ -1,10 +1,10 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.item;
 
 /**
- * Canna da pesca. Slot principale dell'equipaggiamento.
+ * Fishing rod. Main equipment slot.
  *
- * power  → efficacia di PULL durante il combattimento (contrapposto a fish.combatStrength)
- * range  → distanza massima di lancio in tile (Chebyshev)
+ * power  → effectiveness of PULL during combat (opposed to fish.combatStrength)
+ * range  → maximum casting distance in tiles (Chebyshev)
  */
 public class FishingRod extends AbstractItem {
 

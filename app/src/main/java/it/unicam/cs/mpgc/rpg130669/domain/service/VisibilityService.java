@@ -6,17 +6,17 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;
 import it.unicam.cs.mpgc.rpg130669.domain.model.player.Stat;
 
 /**
- * Calcolo della visibilità di un pesce per il giocatore.
- * Funzionamento: perceptionThreshold - player.PERCEPTION --> delta
- *  delta <= 0  → VISIBLE
- *  delta <= 2  → SILHOUETTE
- *  delta <= 5  → SHADOW
- *  delta > 5   → HIDDEN
+ * Calculates fish visibility for the player.
+ * Mechanics: perceptionThreshold - player.PERCEPTION --> delta
+ * delta <= 0  → VISIBLE
+ * delta <= 2  → SILHOUETTE
+ * delta <= 5  → SHADOW
+ * delta > 5   → HIDDEN
  *
- *  La logica è:
- *  - separata dalle entità in quanto dipende solo da due oggetti distinti:
- *    Player e Fishentity
- *  - stateLess, i metodi sono puri
+ * The underlying logic is:
+ * - Separated from the entities themselves as it depends solely on two distinct objects:
+ * Player and FishEntity.
+ * - Stateless, meaning the methods are pure.
  */
 
 public class VisibilityService {

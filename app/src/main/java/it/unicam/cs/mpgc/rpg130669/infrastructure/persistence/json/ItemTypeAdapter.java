@@ -6,16 +6,16 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.item.Item;
 import java.lang.reflect.Type;
 
 /**
- * Adapter Gson per la (de)serializzazione polimorfica di Item.
+ * Gson adapter for polymorphic (de)serialization of Item.
  *
- * Il JSON include un campo "itemType" con il nome semplice della classe
- * concreta (es. "FishingRod"). In deserializzazione il nome viene
- * ricongiunto al package del domain model item e risolto via
- * reflection (Class.forName) — la stessa tecnica discussa per evitare
- * un blocco if/else per ogni sottotipo di Item.
+ * The JSON includes an "itemType" field containing the simple name of the
+ * concrete class (e.g., "FishingRod"). During deserialization, this name is
+ * recombined with the item domain model package and resolved via
+ * reflection (Class.forName) — the same technique discussed to avoid
+ * an if/else block for each Item subtype.
  *
- * Aggiungere un nuovo tipo (es. Lure) non richiede ALCUNA modifica
- * a questa classe: basta che implementi Item e stia nello stesso package.
+ * Adding a new type (e.g., Lure) requires NO changes to this class:
+ * it only needs to implement Item and reside in the same package.
  */
 public class ItemTypeAdapter implements JsonSerializer<Item>, JsonDeserializer<Item> {
 
@@ -24,7 +24,7 @@ public class ItemTypeAdapter implements JsonSerializer<Item>, JsonDeserializer<I
 
     @Override
     public JsonElement serialize(Item src, Type typeOfSrc, JsonSerializationContext context) {
-        // Serializza con la classe CONCRETA — altrimenti perderesti i campi specifici
+    // Serialize with the CONCRETE class — otherwise specific fields would be lost
         JsonObject json = context.serialize(src, src.getClass()).getAsJsonObject();
         json.addProperty(TYPE_FIELD, src.getClass().getSimpleName());
         return json;

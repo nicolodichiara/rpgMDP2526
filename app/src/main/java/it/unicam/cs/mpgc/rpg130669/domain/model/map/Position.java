@@ -1,8 +1,8 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.map;
 
 /**
- * Posizione applicata sia al FishEntity che a Player.
- * Coordinata immutabile (riga, colonna) sulla griglia di gioco.
+ * Position applied to both FishEntity and Player.
+ * Immutable coordinate (row, column) on the game grid.
  */
 public record Position(int row, int col) {
 
@@ -13,7 +13,7 @@ public record Position(int row, int col) {
     }
 
     /**
-     * distanza minima su otto direzioni (sopra-sotto, dx-sx, diagonali) chiamata distanza Chebyshev
+     * Minimum distance across eight directions (up-down, left-right, diagonals) called Chebyshev distance.
      */
     public int distanceTo(Position other){
         return Math.max(Math.abs(this.col - other.col),Math.abs(this.row - other.row));

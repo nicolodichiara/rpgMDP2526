@@ -1,14 +1,14 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.combat;
 
 /**
- * sessione di gameplay del gioco:
- *  CASTING      — esca lanciata, in attesa di abboccata
- *  FISH SPOTTED — pesce entrato in range, può iniziare il combattimento
- *  PLAYER TURN  — turno del giocatore
- *  FISH TURN    — turno del pesce
- *  CAUGHT       — sessione conclusa con successo
- *  ESCAPED      — sessione conclusa senza cattura
- *  GIVEN UP     — giocatore ha abbandonato
+ * Game session states:
+ * CASTING      — bait cast, waiting for a bite
+ * FISH SPOTTED — fish entered range, combat can begin
+ * PLAYER TURN  — player's turn
+ * FISH TURN    — fish's turn
+ * CAUGHT       — session concluded successfully
+ * ESCAPED      — session concluded without a catch
+ * GIVEN UP     — player abandoned the session
  */
 
 public enum SessionState {

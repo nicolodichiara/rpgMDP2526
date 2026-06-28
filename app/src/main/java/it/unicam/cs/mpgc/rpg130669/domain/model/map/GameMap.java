@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Mappa di un livello di gioco.
- * Compone TileGrid (struttura fisica) e SpawnZone[] (logica di spawn).
- * Mantiene la lista dei FishEntity attualmente vivi sulla mappa.
+ * Map of a game level.
+ * Composes a TileGrid (physical structure) and SpawnZone[] (spawn logic).
+ * Maintains the list of FishEntity instances currently alive on the map.
  *
- * requiredLevel è il livello minimo del giocatore per accedere.
+ * requiredLevel is the minimum player level required for access.
  */
 public class GameMap {
 
@@ -50,7 +50,7 @@ public class GameMap {
         activeFish.add(fish);
     }
 
-    /** Prima tile camminabile della griglia — punto di ingresso predefinito. */
+    /** First walkable tile of the grid — default entry point. */
     public Position getDefaultSpawnPosition() {
         return grid.getAllPositions().stream()
                 .filter(this::isWalkable)
@@ -62,12 +62,12 @@ public class GameMap {
         activeFish.remove(fish);
     }
 
-    /** True se non ci sono più pesci attivi — la mappa è "pulita" per questa visita. */
+    /** True if there are no more active fish — the map is "cleared" for this visit. */
     public boolean isCleared() {
         return activeFish.isEmpty();
     }
 
-    /** Deleghe alla TileGrid — evitano di esporre la griglia direttamente. */
+    /** Delegations to the TileGrid — avoids exposing the grid directly. */
     public Tile    getTile(Position pos)  { return grid.getTile(pos);           }
     public boolean isWalkable(Position pos) { return grid.getTile(pos).isWalkable(); }
     public boolean isFishable(Position pos) { return grid.getTile(pos).isFishable(); }

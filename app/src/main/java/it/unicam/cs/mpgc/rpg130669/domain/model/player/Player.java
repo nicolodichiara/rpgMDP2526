@@ -4,16 +4,14 @@ import  it.unicam.cs.mpgc.rpg130669.domain.model.map.Position;
 import java.util.*;
 
 /**
- * il player conserva:
- *     - position
- *     - progressione
- *     - stat
- *     - inventario
- *     la progresssione dei livelli funziona in modo indipendente per ogni skill.
- *     Il livello = media ponderata dei lv skill
+ * The player maintains:
+ * - position
+ * - progression
+ * - stats
+ * - inventory
+ * Level progression functions independently for each skill.
+ * The overall level = weighted average of individual skill levels.
  */
-
-
 
 public class Player {
     private static final int STAT_BASE_VALUE = 1;
@@ -41,10 +39,10 @@ public class Player {
     }
 
     /**
-     * Costruttore di ripristino usato da SaveGameRepository per
-     * ricreare un Player da uno stato salvato con valori esatti
-     * (non tramite gainXp, che è incrementale).
-     * L'inventario viene popolato separatamente dal repository.
+     * Restoration constructor used by SaveGameRepository to
+     * recreate a Player from a saved state with exact values
+     * (bypassing gainXp, which is incremental).
+     * The inventory is populated separately by the repository.
      */
     public Player(String id, String name, Position position,
                   Map<Stat, Integer> stats, Map<Stat, Integer> xpPerStat) {
@@ -61,7 +59,7 @@ public class Player {
     }
 
     /**
-     * livello generale del giocatore (media delle statistiche)
+     * General level of the player (average of skill levels).
      */
     public int getLevel(){
         return (int) stats.values()
@@ -76,11 +74,11 @@ public class Player {
     }
 
     /**
-     * aggiunta di exp a una determinata statistica
-     *         3 casi:
-     *         - 1) la skill == lv max, non aumento l'esperienza
-     *         - 2) la exp + value > EXP_VALUE_PER_LVL aumento lv
-     *         - 3) aumento l'exp
+     * Adds XP to a specific skill.
+     * Handles 3 cases:
+     * - 1) skill is at max level: no experience is added.
+     * - 2) exp + value >= EXP_VALUE_PER_LVL: increments the level.
+     * - 3) standard case: increments the experience.
      */
 
     public void gainExp(Stat stat, int value) {
@@ -119,7 +117,7 @@ public class Player {
     }
 
     /**
-     *  metodo che ritorna il progresso dell'exp di una statistica in forma percentuale
+     * Returns the experience progress of a specific skill as a percentage.
      */
     public double getStatProgress(Stat stat){
         if (checkMaxLvl(stat)) return 1.0;

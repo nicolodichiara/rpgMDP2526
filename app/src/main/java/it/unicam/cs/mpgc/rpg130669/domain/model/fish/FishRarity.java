@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * rarità del pesce:
- * il campo level permette il confronto cardinale fra le rarità
+ * Fish rarity:
+ * the level field allows for cardinal comparison between rarities
  */
 public enum FishRarity {
 

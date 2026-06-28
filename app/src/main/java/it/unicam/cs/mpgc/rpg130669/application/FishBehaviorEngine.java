@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Aggiorna posizione e stato comportamentale di tutti i pesci attivi
- * dopo ogni azione del giocatore.
+ * Updates the position and behavioral state of all active fish
+ * after each player action.
  *
- * Nota: non modifica GameMap né Player — lavora solo su FishEntity.
+ * Note: does not modify GameMap or Player — works exclusively on FishEntity.
  */
 public class FishBehaviorEngine {
    private final Random random;
@@ -22,8 +22,8 @@ public class FishBehaviorEngine {
    }
 
     /**
-     * Entry point chiamato da GameSessionUseCase dopo ogni azione.
-     * @param lastCastPosition posizione dell'esca lanciata, null se non c'è cast attivo.
+     * Entry point called by GameSessionUseCase after each action.
+     * @param lastCastPosition position of the cast bait, null if there is no active cast.
      */
     public void update(GameMap map, Position playerPosition, Position lastCastPosition) {
         for (FishEntity fish : map.getActiveFish()) {
@@ -37,7 +37,7 @@ public class FishBehaviorEngine {
         boolean inRange = !fish.isOutOfRange(playerPos);
 
         if (!inRange) {
-            // Fuori range: casuale tra IDLE e WANDERING
+            // out of range: random behavior between WANDERING and IDLE
             fish.setBehaviorState(
                     random.nextFloat() < profile.wanderRate()
                             ? FishBehaviorState.WANDERING
@@ -45,7 +45,7 @@ public class FishBehaviorEngine {
             );
             return;
         }
-        // In range: transizioni in base al profilo
+        // In range: profile-based transition
         fish.setBehaviorState(switch (fish.getBehaviorState()) {
             case IDLE, WANDERING, NEUTRAL ->
                     random.nextFloat() < profile.fearThreshold()
@@ -65,7 +65,7 @@ public class FishBehaviorEngine {
         });
     }
 
-    // resolver del comportamento del FishEntity
+    // resolver FishEntity behavior
     private void move(FishEntity fish, GameMap map,
                       Position playerPos, Position castPos) {
         Position next = switch (fish.getBehaviorState()) {
@@ -87,8 +87,8 @@ public class FishBehaviorEngine {
     }
 
     /**
-     * Sceglie il vicino fishable che minimizza (toward=true) o
-     * massimizza (toward=false) la distanza da target.
+     * Chooses the adjacent fishable tile that minimizes (toward=true) or
+     * maximizes (toward=false) the distance to the target.
      */
     private Position bestNeighbor(Position from, Position target,
                                   GameMap map, boolean toward) {

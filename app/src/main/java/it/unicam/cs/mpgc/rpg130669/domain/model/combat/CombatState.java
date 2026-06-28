@@ -3,16 +3,15 @@ package it.unicam.cs.mpgc.rpg130669.domain.model.combat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 /**
- * Stato mutabile del combattimento corrente.
- * Separato da FishingSession per rispettare SRP:
- * FishingSession gestisce il flusso dei turni,
- * CombatState mantiene i numeri del combattimento.
+ * Mutable state of the current combat.
+ * Separated from FishingSession to respect SRP:
+ * FishingSession manages turn flow,
+ * CombatState maintains combat numbers.
  *
- * virtualDistance  → distanza virtuale pesce-lenza (aumenta con SWIM_AWAY)
- * rodDurability    → durabilità corrente della canna (ridotta da STRUGGLE/BITE_HARDER)
- * activeEffects    → descrizioni testuali degli effetti attivi (usate dalla UI)
+ * virtualDistance  → virtual fish-line distance (increases with SWIM_AWAY)
+ * rodDurability    → current durability of the rod (reduced by STRUGGLE/BITE_HARDER)
+ * activeEffects    → textual descriptions of active effects (used by the UI)
  */
 public class CombatState {
 

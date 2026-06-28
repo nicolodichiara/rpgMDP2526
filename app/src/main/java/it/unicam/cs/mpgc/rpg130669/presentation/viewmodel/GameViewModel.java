@@ -13,27 +13,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Stato osservabile della sessione di gioco.
- * Il GameController aggiorna queste property dopo ogni azione —
- * il MapRenderer le legge per ridisegnarsi.
+ * Observable state of the game session.
+ * The GameController updates these properties after every action —
+ * the MapRenderer reads them to redraw itself.
  *
- * Usa JavaFX Properties invece di callback manuali:
- * il binding è dichiarativo e la UI si aggiorna automaticamente.
+ * Uses JavaFX Properties instead of manual callbacks:
+ * the binding is declarative, and the UI updates automatically.
  */
 public class GameViewModel {
 
     private final GameSessionUseCase  session;
     private final VisibilityService   visibilityService;
 
-    // ── property osservabili ─────────────────────────────────────────────────
-
+// observable properties
     private final StringProperty fishCountLabel = new SimpleStringProperty("");
     private final StringProperty  clockLabel   = new SimpleStringProperty("");
     private final StringProperty  playerLabel  = new SimpleStringProperty("");
     private final IntegerProperty playerLevel  = new SimpleIntegerProperty(0);
     private final BooleanProperty combatActive = new SimpleBooleanProperty(false);
 
-    /** Snapshot della griglia — ridisegnato dopo ogni azione. */
+    /** Grid snapshot — redrawn after every action. */
     private final ObjectProperty<Map<Position, TileViewModel>> tileGrid =
             new SimpleObjectProperty<>(Map.of());
 
@@ -43,8 +42,8 @@ public class GameViewModel {
     }
 
     /**
-     * Aggiorna tutte le property leggendo lo stato corrente dal GameSessionUseCase.
-     * Chiamato da GameController dopo ogni azione del giocatore.
+     * Updates all properties by reading the current state from GameSessionUseCase.
+     * Called by GameController after every player action.
      */
     public void refresh() {
         Player    player = session.getPlayer();
@@ -71,7 +70,7 @@ public class GameViewModel {
         Map<Position, TileViewModel> grid = new HashMap<>();
         Position playerPos = player.getPosition();
 
-        // Indice veloce posizione → pesce
+        // fast index: position -> fish
         Map<Position, FishEntity> fishIndex = new HashMap<>();
         for (FishEntity f : map.getActiveFish())
             fishIndex.put(f.getPosition(), f);

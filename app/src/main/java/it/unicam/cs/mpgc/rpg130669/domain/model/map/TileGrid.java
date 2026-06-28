@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Griglia di Tile, generata con tile di default, o da file XML
- * Gestisce i controlli su Position
+ * Grid of Tiles, generated with default tiles or from an XML file.
+ * Manages checks on Position.
  */
 
 public class TileGrid {
@@ -17,7 +17,7 @@ public class TileGrid {
 
 
     /**
-     * costruttore che crea la griglia con Tile di default
+     * Constructor that creates the grid with default Tiles.
      * @param rows
      * @param cols
      * @param defaultTile
@@ -38,7 +38,7 @@ public class TileGrid {
     }
 
     /**
-     * costruttore che prende la conformazione della griglia da file xml e ne fa una copia
+     * Constructor that initializes the grid layout from an XML file and creates a copy of it.
      * @param tiles
      */
     public TileGrid(Tile[][] tiles){
@@ -48,7 +48,7 @@ public class TileGrid {
             throw new IllegalArgumentException("L'array tiles non può essere vuoto");
         }
         
-        // Validazione delle righe
+        // row validation
         int expectedCols = tiles[0].length;
         for (int i = 0; i < tiles.length; i++) {
             Objects.requireNonNull(tiles[i], "La riga " + i + " non può essere null");
@@ -83,7 +83,7 @@ public class TileGrid {
     }
 
     /**
-     * Alternativa con coordinate separate
+     * Alternative using separate coordinates.
      */
 
     public Tile getTile(int row, int col) {
@@ -91,7 +91,7 @@ public class TileGrid {
     }
 
     /**
-     * controllo sulla posizione
+     * Bounds checking or validation for a position.
      */
 
     public boolean isValid(Position position){
@@ -101,7 +101,7 @@ public class TileGrid {
     }
 
     /**
-     * lista delle posizioni occupate vicino un'entità (8 caselle adiacenti)
+     * List of occupied positions near an entity (8 adjacent tiles).
      */
     public List<Position> getNeighbors(Position pos){
         

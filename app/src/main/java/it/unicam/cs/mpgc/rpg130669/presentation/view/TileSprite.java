@@ -1,9 +1,9 @@
 package it.unicam.cs.mpgc.rpg130669.presentation.view;
 
 /**
- * mapping TileType -> colore di rendering,
- * In V2 sostituisci getColor() con getImage() che carica
- * un tile da un tilesheet PNG — nessun'altra classe cambia.
+ * Maps TileType -> rendering color.
+ * In V2, replace getColor() with getImage(), which loads
+ * a tile from a PNG tilesheet — no other classes will change.
  */
 
 import it.unicam.cs.mpgc.rpg130669.domain.model.map.TileType;

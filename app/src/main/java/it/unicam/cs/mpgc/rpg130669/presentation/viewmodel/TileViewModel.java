@@ -5,8 +5,8 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.fish.FishVisibility;
 import it.unicam.cs.mpgc.rpg130669.domain.model.map.TileType;
 
 /**
- * Dato immutabile che il MapRenderer usa per disegnare una singola tile.
- * Disaccoppia il renderer dal domain model.
+ * Immutable data that the MapRenderer uses to render a single tile.
+ * Decouples the renderer from the domain model.
  */
 public record TileViewModel(
         TileType        tileType,
@@ -15,7 +15,7 @@ public record TileViewModel(
         FishVisibility  fishVisibility,
         FishBehaviorState fishState
 ) {
-    /** Tile senza entità sopra. */
+    /** Tile with no entity on top. */
     public static TileViewModel empty(TileType type) {
         return new TileViewModel(type, false, false, null, null);
     }

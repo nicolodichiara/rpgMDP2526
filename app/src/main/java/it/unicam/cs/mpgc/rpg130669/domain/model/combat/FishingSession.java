@@ -6,14 +6,14 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;
 
 import java.util.Objects;
 
-    /**
-     * Sessione di pesca attiva tra un giocatore e un pesce target.
-     * Gestisce il flusso dei turni e lo stato della sessione.
-     *
-     * La logica di risoluzione delle azioni è delegata al CombatEngine
-     * nel layer application-
-     * Questa classe è solo il modello dati.
-     */
+/**
+ * Active fishing session between a player and a target fish.
+ * Manages turn flow and session state.
+ *
+ * Action resolution logic is delegated to the CombatEngine
+ * in the application layer.
+ * This class is strictly the data model.
+ */
     public class FishingSession {
 
         private final Player       player;
@@ -42,7 +42,7 @@ import java.util.Objects;
                     || sessionState == SessionState.GIVEN_UP;
         }
 
-        //parte fatta con AI
+        //AI
 
         public Player       getPlayer()       { return player;       }
         public FishEntity   getTargetFish()   { return targetFish;   }

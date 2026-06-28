@@ -7,10 +7,10 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.world.WorldClock;
 import java.util.Optional;
 
 /**
- * Gestisce la porta di output per il salvataggio completo della partita
- * Implementata nel layer infrastracture.persistence.JSON
+ * Handles the output port for the full game save.
+ * Implemented in the infrastructure.persistence.JSON layer.
  * ----
- * Optional usato per gestire il mancato caricamento e quindi le NullPointerException
+ * Optional is used to handle failed loading scenarios and avoid NullPointerExceptions.
  */
 public interface SaveGameRepository {
     void save(Player player, GameMap currentMap, WorldClock clock);
@@ -19,8 +19,8 @@ public interface SaveGameRepository {
     void    deleteSave(String playerId);
 
     /**
-     * Snapshot immutabile dello stato di gioco caricato.
-     * Usato dal GameSessionUseCase per ricostruire la sessione.
+     * Immutable snapshot of the loaded game state.
+     * Used by GameSessionUseCase to reconstruct the session.
      */
     record SaveGameSnapshot(Player player, GameMap currentMap, WorldClock clock) {}
 }

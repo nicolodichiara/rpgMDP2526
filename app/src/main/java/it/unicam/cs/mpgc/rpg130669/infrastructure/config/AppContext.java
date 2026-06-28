@@ -15,10 +15,10 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Composition root dell'applicazione.
- * Costruisce e collega tutte le dipendenze in ordine corretto.
- * App.java crea una sola istanza di AppContext e la usa per
- * ottenere GameSessionUseCase — nient'altro.
+ * Composition root of the application.
+ * Builds and wires all dependencies in the correct order.
+ * App.java creates a single instance of AppContext and uses it
+ * to obtain GameSessionUseCase — nothing else.
  */
 public class AppContext {
 
@@ -32,22 +32,22 @@ public class AppContext {
 
     public AppContext() {
         try {
-            // ── infrastruttura base ──────────────────────────────────────────
+            // base infrastructure
             databaseManager = new DatabaseManager();
 
-            // ── templates dei pesci (hardcoded V1, in V2 da XML) ────────────
+            // fish templates (hardcoded V1, in V2 from XML)
             Map<String, FishTemplate> fishTemplates = buildFishTemplates();
 
-            // ── repository ───────────────────────────────────────────────────
+            // repository
             mapRepository      = new XmlMapRepository(fishTemplates);
             saveGameRepository = new JsonSaveGameRepository(mapRepository);
             journalRepository  = new SqliteJournalRepository(databaseManager);
 
-            // ── domain service ───────────────────────────────────────────────
+            // domain service
             visibilityService  = new VisibilityService();
             SpawnService spawnService = new SpawnService(new Random());
 
-            // ── use case ─────────────────────────────────────────────────────
+            // use case
             inventoryUseCase = new InventoryUseCase();
             QuestUseCase     questUseCase = new QuestUseCase(journalRepository);
             CombatEngine     combatEngine = new CombatEngine(new Random());
@@ -68,7 +68,7 @@ public class AppContext {
         }
     }
 
-    // ── getter per la presentation layer ─────────────────────────────────────
+    // getter for the presentation layer
 
     public GameSessionUseCase getGameSessionUseCase() { return gameSessionUseCase; }
     public InventoryUseCase   getInventoryUseCase()   { return inventoryUseCase;   }
@@ -82,7 +82,7 @@ public class AppContext {
         catch (SQLException e) { System.err.println("Errore chiusura DB: " + e.getMessage()); }
     }
 
-    // ── fish templates V1 ─────────────────────────────────────────────────────
+    // fish templates V1
 
     private Map<String, FishTemplate> buildFishTemplates() {
         BehaviorProfile common = new BehaviorProfile(0.5f, 0.3f, 0.3f, 5, 1);

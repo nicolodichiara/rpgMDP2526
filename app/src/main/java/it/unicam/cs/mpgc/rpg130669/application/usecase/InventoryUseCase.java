@@ -8,9 +8,9 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;
 import java.util.Objects;
 
 /**
- * gestione dell'inventario:
- * valida le precondizioni, si occupa di togliere gli oggetti
- * una volta utilizzati o rotti.
+ * Inventory management:
+ * validates preconditions, handles removing items
+ * once they are used or broken.
  */
 
 public class InventoryUseCase {
@@ -33,8 +33,8 @@ public class InventoryUseCase {
         return bait;
     }
     /**
-     * Recupera la canna equipaggiata (primo FishingRod non rotta trovata).
-     * In futuro: sostituito con uno slot equipaggiamento dedicato.
+     * Retrieves the equipped rod (first unbroken FishingRod found).
+     * In the future: replaced with a dedicated equipment slot.
      */
     public FishingRod getEquippedRod(Player player) {
         return player.getInventory().getItemSet().stream()

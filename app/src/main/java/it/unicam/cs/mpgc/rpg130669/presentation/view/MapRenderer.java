@@ -12,30 +12,30 @@ import javafx.scene.text.Font;
 import java.util.Map;
 
 /**
- * Canvas che disegna la mappa tile per tile.
- * Scala automaticamente TILE_SIZE alla dimensione del canvas.
+ * Canvas that renders the map tile by tile.
+ * Automatically scales TILE_SIZE to match the canvas dimensions.
  *
- * Stile visivo ispirato a Stardew Valley:
- * - palette desaturata con accenti vivaci
- * - bordo scuro sottile tra le tile (pixel art look)
- * - entità disegnate come forme geometriche colorate (placeholder sprite)
+ * Visual style inspired by Stardew Valley:
+ * - Desaturated color palette with vibrant accents
+ * - Thin dark border between tiles (pixel art look)
+ * - Entities rendered as colored geometric shapes (placeholder sprites)
  */
 public class MapRenderer extends Canvas {
 
     private static final int TILE_SIZE  = 48;   // pixel per tile
     private static final int BORDER     = 1;    // pixel di bordo tra tile
 
-    // Colori entità
+    // entity color
     private static final Color PLAYER_COLOR   = Color.web("#f5e642");
     private static final Color PLAYER_OUTLINE = Color.web("#2c1a00");
 
-    // Colori pesce per visibilità
+    // fishVisibility color
     private static final Color FISH_VISIBLE    = Color.web("#ff6b35");
     private static final Color FISH_SILHOUETTE = Color.web("#cc5500", 0.6);
     private static final Color FISH_SHADOW     = Color.web("#1a3a5c", 0.4);
     // HIDDEN: non disegnato
 
-    // Colore overlay stato comportamentale
+    // overlay fishBehavior color
     private static final Color ATTRACTED_OVERLAY = Color.web("#ffff00", 0.25);
     private static final Color FLEEING_OVERLAY   = Color.web("#ff0000", 0.20);
 
@@ -48,8 +48,8 @@ public class MapRenderer extends Canvas {
     }
 
     /**
-     * Aggiorna la griglia e ridisegna tutto il canvas.
-     * Chiamato da GameController ogni volta che GameViewModel notifica un cambio.
+     * Updates the grid and redraws the entire canvas.
+     * Called by GameController whenever GameViewModel notifies a change.
      */
     public void render(Map<Position, TileViewModel> grid, int rows, int cols) {
         this.currentGrid = grid;
@@ -80,25 +80,25 @@ public class MapRenderer extends Canvas {
         double y = pos.row() * TILE_SIZE;
         double s = TILE_SIZE - BORDER;
 
-        // 1 — sfondo tile
+        // 1 - tile background
         Color baseColor = TileSprite.of(vm.tileType()).getColor();
         gc.setFill(baseColor);
         gc.fillRect(x, y, s, s);
 
-        // 2 — overlay stato pesce (visible anche senza il pesce disegnato)
+        // 2 - overlay fishState
         if (vm.hasFish() && vm.fishState() != null)
             drawBehaviorOverlay(gc, x, y, s, vm.fishState());
 
-        // 3 — sprite pesce (dipende da visibilità)
+        // 3 - fish sprite (based on visibility)
         if (vm.hasFish() && vm.fishVisibility() != null
                 && vm.fishVisibility() != FishVisibility.HIDDEN)
             drawFish(gc, x, y, s, vm.fishVisibility());
 
-        // 4 — sprite giocatore
+        // 4 - player sprite
         if (vm.hasPlayer())
             drawPlayer(gc, x, y, s);
 
-        // 5 — bordo scuro pixel-art
+        // 5 - black pixel art border
         gc.setStroke(Color.web("#1a1a1a", 0.3));
         gc.setLineWidth(BORDER);
         gc.strokeRect(x, y, s, s);
@@ -127,7 +127,8 @@ public class MapRenderer extends Canvas {
         };
         if (fishColor == null) return;
 
-        // Pesce disegnato come ellisse orizzontale centrata nella tile
+        // Fish rendered as a horizontal ellipse centered inside the tile
+
         double fw = s * 0.5;
         double fh = s * 0.28;
         double fx = x + (s - fw) / 2.0;
@@ -135,7 +136,7 @@ public class MapRenderer extends Canvas {
         gc.setFill(fishColor);
         gc.fillOval(fx, fy, fw, fh);
 
-        // Pinna caudale — triangolino a sinistra dell'ellisse
+        // Caudal fin — small triangle to the left of the ellipse
         if (visibility == FishVisibility.CLEAR) {
             gc.fillPolygon(
                     new double[]{fx, fx - s * 0.12, fx - s * 0.12},
@@ -146,24 +147,24 @@ public class MapRenderer extends Canvas {
     }
 
     private void drawPlayer(GraphicsContext gc, double x, double y, double s) {
-        // Corpo — cerchio giallo
+
+        // Body — yellow circle
         double r  = s * 0.28;
         double cx = x + s / 2.0;
         double cy = y + s * 0.42;
         gc.setFill(PLAYER_COLOR);
         gc.fillOval(cx - r, cy - r, r * 2, r * 2);
 
-        // Outline scuro pixel-art
+        // Dark pixel-art outline
         gc.setStroke(PLAYER_OUTLINE);
         gc.setLineWidth(1.5);
         gc.strokeOval(cx - r, cy - r, r * 2, r * 2);
 
-        // Puntino canna da pesca — linea sottile verso il basso-destra
-        gc.setStroke(Color.web("#8B6914"));
+        // Fishing rod tip — thin line pointing down-right
         gc.setLineWidth(1.5);
         gc.strokeLine(cx + r * 0.6, cy + r * 0.6, cx + r * 1.8, cy + r * 2.2);
 
-        // Etichetta "P" (rimosso quando ci sono gli sprite veri)
+        // "P" label (to be removed when true sprites are implemented)
         gc.setFill(PLAYER_OUTLINE);
         gc.setFont(Font.font("Monospace", 10));
         gc.fillText("P", cx - 3, cy + 4);

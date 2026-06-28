@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import java.sql.*;
 
 /**
- * Gestisce la connessione SQLite e la creazione dello schema.
- * Una sola istanza per applicazione — passala per costruttore ai repository.
+ * Manages the SQLite connection and schema creation.
+ * A single instance per application — pass it via constructor to the repositories.
  */
 public class DatabaseManager {
 

@@ -10,9 +10,9 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * Carica GameMap da file XML nel classpath.
- * Ogni mappa è un file separato: maps/map_001.xml, maps/map_002.xml, ...
- * Le mappe sono immutabili — vengono cachate dopo il primo caricamento.
+ * Loads GameMap from an XML file within the classpath.
+ * Each map is a separate file: maps/map_001.xml, maps/map_002.xml, ...
+ * Maps are immutable — they are cached after the first load.
  */
 public class XmlMapRepository implements MapRepository {
 
@@ -55,7 +55,7 @@ public class XmlMapRepository implements MapRepository {
         return maps;
     }
 
-    // ── parsing ──────────────────────────────────────────────────────────────
+    // parsing
 
     private GameMap parseMap(Element root) {
         int    levelId       = Integer.parseInt(root.getAttribute("id"));

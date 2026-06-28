@@ -7,10 +7,10 @@ import it.unicam.cs.mpgc.rpg130669.domain.repository.JournalRepository;
 import java.util.List;
 
 /**
- * Verifica e aggiorna lo stato delle quest.
- * Chiamato da GameSessionUseCase dopo ogni azione significativa
- * (cattura, level-up). Non tiene in memoria le quest — le riceve
- * dalla presentazione o dal repository (da implementare in V2).
+ * Verifies and updates the status of the quests.
+ * Called by GameSessionUseCase after each significant action
+ * (catch, level-up). Does not store quests in memory — receives them
+ * from the presentation layer or repository (to be implemented in V2).
  */
 public class QuestUseCase {
 
@@ -21,8 +21,8 @@ public class QuestUseCase {
     }
 
     /**
-     * Controlla tutte le quest non completate e le marca se soddisfatte.
-     * @return lista delle quest appena completate in questo check
+     * Checks all uncompleted quests and marks them if satisfied.
+     * @return list of quests newly completed during this check
      */
     public List<Quest> checkAndComplete(Player player, List<Quest> quests) {
         return quests.stream()

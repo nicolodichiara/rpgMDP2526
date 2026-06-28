@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 import java.util.List;
 
 /**
- * Schermata di selezione mappa. Mostra tutte le mappe disponibili,
- * indicando quali sono accessibili in base al livello del giocatore.
+ * Map selection screen. Displays all available maps,
+ * indicating which ones are accessible based on the player's level.
  */
 public class MapSelectionController {
 
@@ -77,7 +77,7 @@ public class MapSelectionController {
         ((Stage) mapListView.getScene().getWindow()).close();
     }
 
-    /** Cella personalizzata: nome mappa + indicatore di blocco. */
+    /** Custom cell: map name + lock indicator. */
     private class MapCell extends ListCell<GameMap> {
         @Override
         protected void updateItem(GameMap map, boolean empty) {

@@ -3,11 +3,11 @@ package it.unicam.cs.mpgc.rpg130669.domain.model.item;
 import it.unicam.cs.mpgc.rpg130669.domain.model.fish.FishRarity;
 
 /**
- * Esca. Consumabile usabile durante FishingSession (azione USE_BAIT).
+ * Bait. Consumable that can be used during a FishingSession (USE_BAIT action).
  *
- * attractionBonus  → modifica la probabilità di transizione NEUTRAL→ATTRACTED
- * targetRarity     → se non null, il bonus vale solo per pesci di quella rarità
- *                    (es. esca speciale per pesci LEGENDARY)
+ * attractionBonus  → modifies the transition probability from NEUTRAL to ATTRACTED
+ * targetRarity     → if not null, the bonus applies only to fish of that specific rarity
+ * (e.g., special bait for LEGENDARY fish)
  */
 public class Bait extends AbstractItem {
 
@@ -28,8 +28,8 @@ public class Bait extends AbstractItem {
     public boolean    isUniversal()        { return targetRarity == null; }
 
     /**
-     * Ritorna il bonus effettivo per un pesce di una certa rarità.
-     * Se l'esca è specifica e la rarità non corrisponde, il bonus è 0.
+     * Returns the effective bonus for a fish of a given rarity.
+     * If the bait is specific and the rarity does not match, the bonus is 0.
      */
     public float effectiveBonus(FishRarity fishRarity) {
         if (isUniversal() || targetRarity == fishRarity) return attractionBonus;

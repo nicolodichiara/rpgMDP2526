@@ -5,9 +5,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- * Gestore degli errori di parsing XML (JAXP).
- * Senza un ErrorHandler registrato sul DocumentBuilder,
- * gli errori di parsing passano inosservati.
+ * Handles XML parsing errors (JAXP).
+ * Without an ErrorHandler registered on the DocumentBuilder,
+ * parsing errors go unnoticed.
  */
 public class XmlErrorHandler implements ErrorHandler {
 

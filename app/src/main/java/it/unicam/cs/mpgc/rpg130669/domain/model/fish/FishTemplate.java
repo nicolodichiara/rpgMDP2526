@@ -3,11 +3,11 @@ package it.unicam.cs.mpgc.rpg130669.domain.model.fish;
 import java.util.Objects;
 
 /**
- * Dati statici e immutabili di una specie di pesce.
- * Caricato da XML all'avvio — non cambia mai a runtime.
+ * Static and immutable data of a fish species.
+ * Loaded from XML at startup — never changes at runtime.
  *
- * perceptionThreshold: percezione minima del giocatore per vedere il pesce
- * come VISIBLE. Sotto soglia, VisibilityService degrada a SILHOUETTE / SHADOW / HIDDEN.
+ * perceptionThreshold: minimum player perception required to see the fish
+ * as VISIBLE. Below this threshold, VisibilityService degrades it to SILHOUETTE / SHADOW / HIDDEN.
  */
 
 public record FishTemplate(

@@ -5,13 +5,13 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.item.Item;
 import java.util.*;
 
 /**
- * Inventario del giocatore — mappa Item → quantità.
+ * Player's inventory — maps an Item to its quantity.
  *
- * Usa Item come chiave della mappa: due item con lo stesso id
- * sono considerati identici (equals/hashCode delegati all'id in AbstractItem).
+ * Uses Item as the map key: two items with the same id
+ * are considered identical (equals/hashCode are delegated to the id in AbstractItem).
  *
- * Utilizzo della LinkedHashMap, usata per sfruttare la proprietà FIFO (ordine di raccolta degli oggetti)
- * Nota: implementazione non sincrona
+ * Uses a LinkedHashMap to leverage its FIFO property (maintaining the insertion order of items).
+ * Note: this implementation is not synchronized.
  */
 
 
@@ -19,8 +19,8 @@ public class Inventory {
     private final Map<Item, Integer> items;
 
     /**
-     * Aggiunge `quantity` unità dell'item.
-     * Se l'item è già presente, somma alla quantità esistente.
+     * Adds `quantity` units of the item.
+     * If the item is already present, increments the existing quantity.
      */
     public Inventory(){
         this.items = new LinkedHashMap<>();
@@ -32,10 +32,10 @@ public class Inventory {
         items.merge(item, quantity, Integer::sum);
     }
     /**
-     * Rimuove `quantity` unità dell'item.
-     * Se la quantità scende a zero rimuove la entry dalla mappa.
+     * Removes `quantity` units of the item.
+     * If the quantity drops to zero, the entry is removed from the map.
      *
-     * @throws IllegalStateException se non ci sono abbastanza unità
+     * @throws IllegalStateException if there are not enough units available
      */
     public void remove(Item item, int quantity) {
 

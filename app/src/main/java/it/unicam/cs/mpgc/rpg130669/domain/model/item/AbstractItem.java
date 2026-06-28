@@ -3,16 +3,16 @@ package it.unicam.cs.mpgc.rpg130669.domain.model.item;
 import java.util.Objects;
 
 /**
- * Implementazione base dei campi comuni a tutti gli item.
- * La durabilità è gestita qui: quando scende a 0 l'item è rotto
- * e non può essere usato. -1 significa durabilità infinita (item non consumabili).
+ * Base implementation of fields common to all items.
+ * Durability is managed here: when it drops to 0, the item is broken
+ * and cannot be used. -1 signifies infinite durability (non-consumable items).
  */
 public abstract class AbstractItem implements Item {
 
     private final String id;
     private final String name;
     private final String description;
-    private int durability; // -1 = infinita
+    private int durability; // -1 = infinity
 
     protected AbstractItem(String id, String name, String description, int durability) {
         this.id          = Objects.requireNonNull(id,          "id non può essere null");
@@ -34,7 +34,7 @@ public abstract class AbstractItem implements Item {
     }
 
     /**
-     * Riduce la durabilità di `amount`. No-op se durabilità infinita o già rotto.
+     * Reduces durability by `amount`. No-op if durability is infinite or already broken.
      */
     public void wear(int amount) {
         if (isBroken()) return;
@@ -43,8 +43,8 @@ public abstract class AbstractItem implements Item {
     }
 
     /**
-     * equals e hashCode basati su id — due item con lo stesso id
-     * sono identici per Inventory (usa Item come chiave di mappa).
+     * equals and hashCode based on id — two items with the same id
+     * are identical for Inventory (uses Item as a map key).
      */
     @Override
     public boolean equals(Object o) {

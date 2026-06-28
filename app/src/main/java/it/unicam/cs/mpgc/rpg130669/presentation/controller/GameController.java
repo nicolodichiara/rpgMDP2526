@@ -21,9 +21,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Controller principale del gioco.
- * Coordina: input tastiera → use case → ViewModel → MapRenderer.
- * Non contiene logica di dominio — delega tutto al GameSessionUseCase.
+ * Main controller of the game.
+ * Coordinates: keyboard input → use case → ViewModel → MapRenderer.
+ * Contains no domain logic — delegates everything to GameSessionUseCase.
  */
 public class GameController {
 
@@ -48,11 +48,11 @@ public class GameController {
     private MapRepository      mapRepository;
 
 
-    // Posizione selezionata per il cast (null se nessuna)
+    // Selected position for casting (null if none)
     private Position selectedCastTarget = null;
 
     /**
-     * Chiamato da App.java dopo aver caricato l'FXML.
+     * Called by App.java after loading the FXML.
      */
     public void init(GameSessionUseCase session,
                      InventoryUseCase inventoryUseCase,
@@ -71,9 +71,9 @@ public class GameController {
 
 
     /**
-     * fa il setup per il map render, dopo permette di selezionare la Tile dove eseguire il lancio
-     * stampa a console la tile selezionata.
-     * Click su una tile → seleziona come target del cast
+     * Sets up the map renderer, then allows selecting the Tile to cast the line.
+     * Prints the selected tile to the console.
+     * Click on a tile → selects it as the target for the cast.
      */
 
     private void setupMapRenderer() {
@@ -90,7 +90,7 @@ public class GameController {
     }
 
     /**
-     * setup per l'interpretazione degli input da tastiera per javaFx
+     * Sets up keyboard input handling for JavaFX.
      */
     private void setupKeyboardInput() {
         // Il focus deve stare sul container per ricevere i tasti
@@ -101,9 +101,9 @@ public class GameController {
     }
 
     /**
-     * gestisce il contenuto del testo visualizzato, del
-     * clock, player, fishCount
-     * aggiorna la mappa quando la griglia cambia
+     * Manages the content of the displayed text, including the
+     * clock, player, and fishCount.
+     * Updates the map when the grid changes.
      */
     private void bindViewModel() {
         clockLabel .textProperty() .bind(viewModel.clockLabelProperty());
@@ -121,8 +121,8 @@ public class GameController {
     }
 
     /**
-     * case per la gestione dell'input da tastiera, che associa i valori delle frecce a quelli delle lettere
-     * chiamano position.traslate per spostare fisicamente il giocatore a una nuova posizione
+     * Switch cases for handling keyboard input, mapping arrow key values to letter keys.
+     * Calls position.translate to physically move the player to a new position.
      */
     private void handleKey(KeyEvent e) {
         if (session.getActiveSession() != null
@@ -143,17 +143,17 @@ public class GameController {
             session.movePlayer(dest);
             viewModel.refresh();
         } catch (IllegalArgumentException ex) {
-            // Tile non camminabile o fuori mappa - (non esce a console)
+    // Tile is non-walkable or out of bounds - (does not print to console)
         }
         e.consume();
     }
 
-    // AZIONI FXML
+    // FXML ACTION
 
     /**
-     * gestione dell'esecuizione del btn 'lancia', se la posizione è non null, salva la sessione e successivamente la aggiorna.
-     * Se nella sessione salvata, risulta che il lancio è avvenuto dove c'è un pesce inizia il combattimento.
-     * sennò si continua con la sessione refreshata
+     * Handles the execution of the 'Cast' button. If the position is non-null, it saves the session and then updates it.
+     * If the saved session shows that the cast landed where a fish is present, combat begins.
+     * Otherwise, it continues with the refreshed session.
      */
     @FXML
     private void onCast() {
@@ -178,7 +178,7 @@ public class GameController {
     }
 
     /**
-     * gestione dell'esecuzione del btn 'save'
+     * Handles the execution of the 'Save' button.
      */
     @FXML
     private void onSave() {
@@ -191,8 +191,8 @@ public class GameController {
     }
 
     /**
-     * gestione dell'esecuzione del btn 'cambia mappa'. Carica il pacchetto delle risorse per la selezione delle map
-     * se cambia la mappa di istanzia un nuovo Stage.
+     * Handles the execution of the 'Change Map' button. Loads the resource bundle for map selection.
+     * If the map changes, it instantiates a new Stage.
      */
     @FXML
     private void onChangeMap() {
@@ -222,12 +222,12 @@ public class GameController {
     }
 
     /**
-     * Carica la sessione di combattimento, quindi chiama il file combat.fxml
-     * istanzia il controller e ne fa l'init.
-     * finito il combattimento fa il refresh,
-     * controlla le quest,
-     * controlla se avvenuta la cattura di tutti i pesci della mappa
-     * ri-carica la sessione di pesca
+     * Loads the combat session, then calls the combat.fxml file,
+     * instantiates the controller, and initializes it.
+     * Once combat ends, it refreshes the view,
+     * checks quests,
+     * checks if all fish on the map have been caught,
+     * and reloads the fishing session.
      */
 
     private void openCombatWindow(FishingSession fishingSession) {
@@ -266,7 +266,7 @@ public class GameController {
     }
 
     /**
-     * update delle statistiche nella scritta a output
+     * Updates the stats in the output text display.
      */
     private void updateStatBar() {
         var player = session.getPlayer();
@@ -277,7 +277,7 @@ public class GameController {
     }
 
     /**
-     * @return stringa formattata con la percentuale per il superamento del livello per la stat
+     * @return a formatted string showing the completion percentage for the level stat
      */
     private String formatStat(String label, Stat stat, Player player) {
         int progressPercent = (int) Math.round(player.getStatProgress(stat) * 100);

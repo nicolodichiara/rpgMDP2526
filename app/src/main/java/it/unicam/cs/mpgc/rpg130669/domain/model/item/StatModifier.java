@@ -5,8 +5,8 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.player.Stat;
 import java.util.Objects;
 
 /**
- * Modificatore di una stat del giocatore applicato da un Accessory.
- * amount può essere negativo (malus) o positivo (bonus).
+ * Modifier for a player stat applied by an Accessory.
+ * amount can be negative (malus) or positive (bonus).
  */
 public record StatModifier(Stat stat, int amount) {
 

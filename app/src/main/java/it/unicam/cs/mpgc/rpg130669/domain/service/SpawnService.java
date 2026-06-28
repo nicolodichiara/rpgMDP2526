@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Popola una mappa con pesci nelle spawn zone.
- * La selezione del tipo di pesce è pesata (weighted random).
- * La posizione è casuale tra le tile fishable della zona.
+ * Populates a map with fish in the designated spawn zones.
+ * Fish species selection is based on a weighted random system.
+ * The spawn position is chosen randomly from the fishable tiles within the zone.
  */
 
 public class SpawnService {
@@ -26,7 +26,7 @@ public class SpawnService {
     }
 
     /**
-     * popola la mappa di gioco con FishEntity nelle rispettive aree di Spawn
+     * Populates the game map with FishEntities inside their respective Spawn areas.
      */
 
     public void populate(GameMap map, WorldClock clock){
@@ -44,9 +44,9 @@ public class SpawnService {
     }
 
     /**
-     * Moltiplica il peso totale dei pesci nella FishPool(pesci totali) con un doubleRandom (0.0 - 1-0).
-     * Quindi aggiunge entità fino a che il peso non ha raggiunto quella soglia.
-     * @param zone Zona di spawn, che contiene l'insieme dei pesci.
+     * Multiplies the total weight of the fish in the FishPool (total fish pool) by a random double (0.0 - 1.0).
+     * It then adds entities sequentially until the running weight reaches that threshold.
+     * @param zone The spawn zone, which contains the set of available fish.
      */
 
     private FishTemplate selectWeighted(SpawnZone zone){
@@ -62,11 +62,11 @@ public class SpawnService {
     }
 
     /**
-     * @param map mappa di gioco
-     * @param zone zona di spawn
-     * @return lista di posizioni dove si può pescare
+     * @param map the game map
+     * @param zone the spawn zone
+     * @return a list of positions where fishing is allowed
      *
-     * scorre tutta la mappa e cerca le posizioni isFishable == true;
+     * Iterates through the entire map to find positions where isFishable == true.
      */
 
     private Position randomFishablePosition(GameMap map, SpawnZone zone) {

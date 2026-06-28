@@ -14,9 +14,9 @@ import it.unicam.cs.mpgc.rpg130669.domain.model.player.Stat;
 import java.util.Random;
 
 /**
- * Risolve i turni di una FishingSession.
- * Unica responsabilità: dato uno stato di sessione e un'azione,
- * produrre il nuovo stato. Non interagisce con persistenza né UI.
+ * Resolves the turns of a FishingSession.
+ * Sole responsibility: given a session state and an action,
+ * produce the new state. Does not interact with persistence or UI.
  */
 public class CombatEngine {
     private static final int PULL_BASE_DAMAGE = 5;
@@ -32,7 +32,7 @@ public class CombatEngine {
         this.random = random;
     }
 
-    // turno del giocatore
+    // player turn
 
     public void applyPlayerAction(FishingSession session, PlayerAction action, Item usedItem) {
 
@@ -102,7 +102,7 @@ public class CombatEngine {
         player.gainExp(Stat.PATIENCE, 8);
     }
 
-    // ── turno pesce ───────────────────────────────────────────────────────────
+    // fish turn
 
     public void applyFishTurn(FishingSession session) {
         if (!session.isFishTurn())
@@ -123,7 +123,7 @@ public class CombatEngine {
         if (session.isActive()) session.toPlayerTurn();
     }
 
-    // selettore randomico, per azione del pesce
+    // random selector to decide fish behavior
     private FishAction selectFishAction(FishEntity fish) {
         float fear = fish.getTemplate().behaviorProfile().fearThreshold();
         double roll = random.nextDouble();
@@ -134,7 +134,7 @@ public class CombatEngine {
         return FishAction.TIRE;
     }
 
-    // resolver dei case:
+    // resolver
 
     private void resolveStruggle(CombatState state) {
         state.damageRod(STRUGGLE_ROD_DAMAGE);
@@ -157,7 +157,6 @@ public class CombatEngine {
         state.addEffect("Il pesce morde forte! Canna danneggiata di " + BITE_HARDER_ROD_DAMAGE + ".");
     }
 
-    // ── esito ─────────────────────────────────────────────────────────────────
 
     private void checkOutcome(FishingSession session) {
         FishEntity fish = session.getTargetFish();

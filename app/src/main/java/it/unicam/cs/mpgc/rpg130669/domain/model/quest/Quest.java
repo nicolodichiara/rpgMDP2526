@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Gestione delle Quest, ancora non attivo nel gioco
- * Una quest è soddisfatta quando TUTTE le sue condizioni sono soddisfatte.
- * rewards è una lista di stringhe descrittive — il QuestUseCase
- * le interpreta e applica gli effetti concreti (sblocco mappa, item, ecc.).
+ * Quest Management, not yet active in the game.
+ * A quest is fulfilled when ALL of its conditions are met.
+ * rewards is a list of descriptive strings — the QuestUseCase
+ * interprets them and applies the actual concrete effects (unlocking maps, items, etc.).
  */
 public class Quest {
 

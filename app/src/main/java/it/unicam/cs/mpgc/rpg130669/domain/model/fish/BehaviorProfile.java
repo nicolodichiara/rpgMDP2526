@@ -1,13 +1,12 @@
 package it.unicam.cs.mpgc.rpg130669.domain.model.fish;
 /**
- * Profilo comportamentale immutabile di una specie di pesce.
- * Definisce i pesi probabilistici del passaggio tra uno stato e l'altro.
- *
- * curiosity      → probabilità [0,1] di avvicinarsi all'esca quando NEUTRAL
- * fearThreshold  → probabilità [0,1] di spaventarsi per un'azione del giocatore
- * wanderRate     → probabilità [0,1] di muoversi casualmente quando IDLE
- * reactionRange  → distanza (tile, Chebyshev) oltre cui il pesce ignora il giocatore
- * fleeSpeed      → tile percorse per turno quando FLEEING
+ * Immutable behavioral profile of a fish species.
+ * Defines the probabilistic weights of transitioning between states.
+ * curiosity      → probability [0,1] of approaching the bait when NEUTRAL
+ * fearThreshold  → probability [0,1] of scaring away due to a player action
+ * wanderRate     → probability [0,1] of moving randomly when IDLE
+ * reactionRange  → distance (tiles, Chebyshev) beyond which the fish ignores the player
+ * fleeSpeed      → tiles traversed per turn when FLEEING
  */
 public record BehaviorProfile(
         float   curiosity,

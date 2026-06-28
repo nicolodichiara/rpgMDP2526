@@ -12,8 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 /**
- * Controller del pannello di combattimento.
- * Riceve i riferimenti dal GameController quando viene aperto.
+ * Controller for the combat panel.
+ * Receives references from the GameController when opened.
  */
 public class CombatController {
 
@@ -51,8 +51,8 @@ public class CombatController {
     }
 
     /**
-     * fa il refresh della sessione, di tutte le statistiche percentuali
-     * gestisce il passo successivo del turno del giocatore, disabilitando i bottoni
+     * Refreshes the session and all percentage statistics.
+     * Handles the next step of the player's turn, disabling the buttons.
      */
     private void refresh() {
         FishingSession fs = fishingSession;
@@ -88,10 +88,10 @@ public class CombatController {
     }
 
     /**
-     * crea i case per la conclusione della sessione con tutti i casi possibili
-     * CAUGHT,  hai vinto il combattimento
-     * ESCAPED, il pesce è fuggito
-     * GIVE UP, ti sei arreso
+     * Creates the cases for the end of the session, covering all possible outcomes:
+     * CAUGHT — you won the battle.
+     * ESCAPED — the fish escaped.
+     * GIVE UP — you surrendered.
      */
     private void handleConcluded(FishingSession fs) {
         String msg = switch (fs.getSessionState()) {
@@ -110,7 +110,7 @@ public class CombatController {
     @FXML private void onGiveUp() { performAction(PlayerAction.GIVE_UP, null); }
 
     /**
-     * gestisce l'uso della BAIT, se usata e presente ne consuma 1 qta
+     * Handles the use of BAIT; if used and present, consumes 1 unit of quantity.
      */
     @FXML
     private void onBait() {
@@ -125,11 +125,10 @@ public class CombatController {
     }
 
     /**
-     *
-     * @param action
-     * @param item
-     * metodo generale che per ogni implementazione di item,
-     * chiama la PerformCombatAction relativa e refresha la sessione
+     * @param action the combat action to perform
+     * @param item the item to use
+     * General method that calls the corresponding PerformCombatAction for any
+     * item implementation and refreshes the session.
      */
     private void performAction(PlayerAction action, Item item) {
         try {
@@ -142,7 +141,7 @@ public class CombatController {
     }
 
     /**
-     * @return l'id della prima esca (quindi quella selezionata).
+     * @return the ID of the first bait (which is the currently selected one).
      */
     private String pickBaitId() {
         return session.getPlayer().getInventory().getItemSet().stream()

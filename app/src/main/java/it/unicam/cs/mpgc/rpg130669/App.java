@@ -15,8 +15,9 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.util.List;
+
 /**
- * punto di partenza del progetto, che si basa su AppContext
+ * Starting point of the project, which relies on AppContext.
  */
 public class App extends Application {
 
@@ -24,11 +25,11 @@ public class App extends Application {
 
 
     /**
-     * set-up per l'inizio del gioco, vede se presente un salvataggio e in caso carica la schermata.
-     * in caso di nuova partita genera un
-     * player nella posizione 2,2
-     * fishingRod base.
-     * Infine carica il gioco
+     * Sets up the start of the game; checks if a save file exists and loads the screen accordingly.
+     * In the case of a new game, it generates:
+     * - A player at position (2,2)
+     * - A starter fishing rod.
+     * Finally, it loads the game.
      */
     @Override
     public void start(Stage stage) throws Exception {
@@ -66,7 +67,7 @@ public class App extends Application {
     }
 
     /**
-     * nova partita / carica salvataggio
+     * New game / load save file.
      */
     private boolean askContinueOrNewGame() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

@@ -6,7 +6,7 @@ import it.unicam.cs.mpgc.rpg130669.domain.repository.JournalRepository;
 
 import java.util.Objects;
 
-/** Condizione: raggiungere un valore minimo in una stat specifica. */
+/** Condition: reach a minimum value in a specific stat. */
 public class ReachLevelCondition implements QuestCondition {
 
     private final Stat stat;

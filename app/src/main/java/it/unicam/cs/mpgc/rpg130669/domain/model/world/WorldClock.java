@@ -3,11 +3,11 @@ package it.unicam.cs.mpgc.rpg130669.domain.model.world;
 import java.util.Objects;
 
 /**
- * Orologio del mondo di gioco. Mantiene giorno, fascia oraria e meteo correnti.
- * Persiste su JSON nel savegame.
+ * Game world clock. Tracks the current day, time of day, and weather.
+ * Persisted as JSON in the savegame.
  *
- * Il meteo è determinato esternamente (da WorldClockService nel layer application)
- * tramite un seed casuale — WorldClock si limita a tenerlo in stato.
+ * Weather is determined externally (by WorldClockService in the application layer)
+ * using a random seed — WorldClock only maintains its state.
  */
 
 public class WorldClock {

@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Accessorio equipaggiabile in slot passivo.
- * Applica una lista di StatModifier alle stat del giocatore finché è equipaggiato.
- * Durabilità infinita (-1) — gli accessori non si consumano.
+ * Equippable accessory for a passive slot.
+ * Applies a list of StatModifiers to the player's stats as long as it is equipped.
+ * Infinite durability (-1) — accessories do not wear out.
  */
 public class Accessory extends AbstractItem {
 

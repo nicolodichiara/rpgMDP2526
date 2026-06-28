@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * GRASS        —     camminabile, non pescabile
- * DOCK         —     camminabile,     pescabile
- * WATER        — non camminabile,     pescabile
- * DEEP WATER   — non camminabile,     pescabile
- * ROCK         — non camminabile, non pescabile
- * SAND         —     camminabile, non pescabile
+ * GRASS        —     walkable, non-fishable
+ * DOCK         —     walkable,     fishable
+ * WATER        — non-walkable,     fishable
+ * DEEP WATER   — non-walkable,     fishable
+ * ROCK         — non-walkable, non-fishable
+ * SAND         —     walkable, non-fishable
  */
 
 public enum TileType {

@@ -4,24 +4,24 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Gestisce la porta di output per il fishing journal
- * Implementata nel layer infrastracture.persistence.SQlite
+ * Handles the output port for the fishing journal.
+ * Implemented in the infrastructure.persistence.SQLite layer.
  * ----
- * Optional usato per gestire il mancato caricamento e quindi le NullPointerException
+ * Optional is used to handle failed loading scenarios and avoid NullPointerExceptions.
  */
 public interface JournalRepository {
-    /** Registra una nuova cattura. */
+    /** Logs a new catch. */
     void recordCatch(String playerId, String fishId, int weight);
 
-    /** Numero totale di catture per una specie. */
+    /** Total number of catches for a specific species. */
     int getCatchCount(String playerId, String fishId);
 
-    /** Peso massimo catturato per una specie (record personale). */
+    /** Maximum weight caught for a specific species (personal record). */
     Optional<Integer> getRecord(String playerId, String fishId);
 
-    /** Tutte le specie catturate almeno una volta da questo giocatore. */
+    /** All species caught at least once by this player. */
     List<String> getDiscoveredFishIds(String playerId);
 
-    /** True se il giocatore ha già catturato questa specie. */
+    /** True if the player has previously caught this species. */
     boolean hasDiscovered(String playerId, String fishId);
 }

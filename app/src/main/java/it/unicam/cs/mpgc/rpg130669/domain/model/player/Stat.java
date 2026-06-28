@@ -7,14 +7,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Statistiche skill-based del giocatore.
- * Ogni stat cresce usando quella stat — non c'è XP globale.
+ * Skill-based player statistics.
+ * Each stat grows by actively using that specific stat — there is no global XP.
  *
- * PERCEPTION  — amplia FishVisibility, aumenta reactionRange percepito
- * CASTING     — distanza e precisione del lancio
- * STRENGTH    — efficacia di PULL in combattimento
- * PATIENCE    — riduce probabilità di fuga del pesce durante WAIT
- * CRAFTING    — sblocca ricette e qualità degli item craftati (V2)
+ * PERCEPTION  — expands FishVisibility, increases perceived reactionRange
+ * CASTING     — casting distance and accuracy
+ * STRENGTH    — PULL effectiveness during combat
+ * PATIENCE    — reduces fish escape probability during WAIT
+ * CRAFTING    — unlocks recipes and crafted item quality (V2)
  */
 
 public enum Stat {

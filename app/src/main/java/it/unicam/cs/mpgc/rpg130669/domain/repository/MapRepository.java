@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Gestisce la porta di output per le mappe
- * Implementata nel layer infrastracture.persistence.xml
+ * Handles the output port for maps.
+ * Implemented in the infrastructure.persistence.xml layer.
  * ----
- * Optional usato per gestire il mancato caricamento e quindi le NullPointerException()
+ * Optional is used to handle failed loading scenarios and avoid NullPointerExceptions.
  */
 public interface MapRepository {
     Optional<GameMap> loadById(int levelId);
