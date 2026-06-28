@@ -1,8 +1,7 @@
-package it.unicam.cs.mpgc.rpg130669.domain.model.quest.condition;
+package it.unicam.cs.mpgc.rpg130669.domain.model.quest;
 
 import it.unicam.cs.mpgc.rpg130669.domain.model.player.Player;
 import it.unicam.cs.mpgc.rpg130669.domain.model.player.Stat;
-import it.unicam.cs.mpgc.rpg130669.domain.model.quest.QuestCondition;
 import it.unicam.cs.mpgc.rpg130669.domain.repository.JournalRepository;
 
 import java.util.Objects;
