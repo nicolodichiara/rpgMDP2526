@@ -39,19 +39,20 @@ cd rpgMDP2526
 
 ### Building the Project
 
-To build the project using Gradle, run:
+To build the project using Gradle, run: (if you don't have gradle installed ./gradlew build)
 
 ```bash
-gradle build   // ./gradlew build
+gradle build   
 
 ```
 
 ### Running the Application
 
-To launch the game, execute:
+To launch the game, execute: (if you don't have gradle installed ./gradlew run)
+:
 
 ```bash
-gradle run   // ./gradlew run
+gradle run   
 
 ```
 
