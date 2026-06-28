@@ -42,7 +42,7 @@ cd rpgMDP2526
 To build the project using Gradle, run:
 
 ```bash
-./gradlew build
+gradle build   // ./gradlew build
 
 ```
 
@@ -51,7 +51,7 @@ To build the project using Gradle, run:
 To launch the game, execute:
 
 ```bash
-./gradlew run
+gradle run   // ./gradlew run
 
 ```
 
